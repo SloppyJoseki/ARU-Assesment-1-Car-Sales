@@ -42,7 +42,7 @@ int main()
 			break;
 
 		case '3':
-			printf("loser");
+			viewAllSalesData();
 			break;
 
 		case '4':
