@@ -146,7 +146,7 @@ struct purchaseData* readDataFromFile()
 	{
 		return;
 	}
-	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
+	fileSalesData = fopen("testData.txt", "r");
 
 	if (fileSalesData != NULL)
 	{
@@ -404,7 +404,7 @@ user to select how many cars they would like to buy */
 
 		// Now it's time to open the file so we can write to it
 		// https://www.youtube.com/watch?v=7ZFgphYJvUA&ab_channel=PortfolioCourses Used this video as a source
-		FILE* fileData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "a");
+		FILE* fileData = fopen("testData.txt", "a");
 		if (fileData == NULL)
 		{
 			printf("ERROR opening file please\n");
@@ -461,7 +461,7 @@ void viewAllSalesData()
 
 	/*https://www.youtube.com/watch?v=rbVt5v8NNe8&ab_channel=PortfolioCourses code in this section inspired by this video most of the changes so
 			   far are just changes to variable names to make them fit the program better but this could change as the project progresses*/
-	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
+	fileSalesData = fopen("testData.txt", "r");
 	// specify they full path but remember use two \\ so it doesn't  get confused
 
 	if (fileSalesData == NULL) //Just a nice check to see if the file exists and actually contains anything if not an error is printed
