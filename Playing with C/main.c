@@ -2,6 +2,7 @@
 
 #include <stdio.h>  
 #include <string.h>
+#include <malloc.h>
 #include "functions.h"
 
 int main()
@@ -42,6 +43,7 @@ int main()
 			break;
 
 		case '3':
+			system("cls");
 			viewAllSalesData();
 			break;
 
@@ -49,9 +51,7 @@ int main()
 			// Simple exit option alters the control variable for the main loop allowing it to end
 			desireToContinue = false;
 			break;
-
 		}
-
 
 	} while (desireToContinue == true);
 
