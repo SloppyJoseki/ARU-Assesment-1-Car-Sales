@@ -299,7 +299,7 @@ user to select how many cars they would like to buy */
 		case '5':
 			// carsList[0] is Toyota
 			carsList[0].amountOfCar -= 1;
-			if (carsList[0].amountOfCar <= 20)
+			if (carsList[0].amountOfCar >= 0)
 			{
 				currentPurchaseTotal = currentPurchaseTotal + carsList[0].carPrice;
 				carsPurchased++;
@@ -316,7 +316,7 @@ user to select how many cars they would like to buy */
 		case '6':
 			// carsList[1] is Kia
 			carsList[1].amountOfCar -= 1;
-			if (carsList[1].amountOfCar <= 20)
+			if (carsList[1].amountOfCar >= 0)
 			{
 				currentPurchaseTotal = currentPurchaseTotal + carsList[1].carPrice;
 				carsPurchased++;
@@ -334,7 +334,7 @@ user to select how many cars they would like to buy */
 		case '7':
 			// carsList[2] is Hyundai
 			carsList[2].amountOfCar -= 1;
-			if (carsList[2].amountOfCar <= 20)
+			if (carsList[2].amountOfCar >= 0)
 			{
 				currentPurchaseTotal = currentPurchaseTotal + carsList[2].carPrice;
 				carsPurchased++;
