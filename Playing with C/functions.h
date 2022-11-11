@@ -142,7 +142,10 @@ struct purchaseData* readDataFromFile()
 	FILE* fileSalesData;
 	int numberOfLinesInFile = countLinesInFile();
 	struct purchaseData* purchases = malloc(sizeof(struct purchaseData) * numberOfLinesInFile);
-
+	if (purchases == NULL)
+	{
+		return;
+	}
 	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
 
 	if (fileSalesData != NULL)
@@ -219,6 +222,11 @@ struct carsData* assembleCarsData()
 	free(purchases);
 
 	struct carsData* cars = malloc(sizeof(struct carsData) * 3);
+
+	if (cars == NULL)
+	{
+		return;
+	}
 
 	strcpy(cars[0].carName, "Toyota");
 	cars[0].carPrice = 21460.60f;
