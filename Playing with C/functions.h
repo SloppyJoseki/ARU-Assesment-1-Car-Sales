@@ -146,7 +146,7 @@ struct purchaseData* readDataFromFile()
 	{
 		return;
 	}
-	fileSalesData = fopen("testData.txt", "r");
+	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
 
 	if (fileSalesData != NULL)
 	{
@@ -190,7 +190,7 @@ struct purchaseData* readDataFromFile()
 	}
 }
 
-struct carsData* assembleCarsData()
+struct carsData* calculateCarsInStock()
 {
 	struct purchaseData* purchases = readDataFromFile();
 
@@ -247,8 +247,7 @@ struct carsData* assembleCarsData()
 
 void viewStockOfCars()
 {
-	struct carsData* carsList;
-	carsList = assembleCarsData();
+	struct carsData* carsList = calculateCarsInStock();
 	insertionSort(carsList, 3);
 
 	printf("Here is a list of our stock of cars!\n");
@@ -261,11 +260,8 @@ void viewStockOfCars()
 	free(carsList);
 }
 
-void purchaseACar()
-/* First thing the function does is read the file in order to figure out how many cars are in stock then it goes through the process of allowing the
-user to select how many cars they would like to buy */
+struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 {
-
 	struct purchaseData saleToProcess;
 	saleToProcess.totalPrice = 0;
 	saleToProcess.pricePaid = 0;
@@ -279,14 +275,6 @@ user to select how many cars they would like to buy */
 	saleToProcess.numberOfHyundaiPurchased = 0;
 
 	bool desireToContinue1 = true;
-	bool checkIfNeedToPurchaseCar = true;
-	float currentPurchaseTotal = 0;
-	int carsPurchased = 0;
-	char fullName[200];
-
-	struct carsData* carsList;
-	carsList = assembleCarsData();
-
 
 	do
 	{
@@ -309,8 +297,8 @@ user to select how many cars they would like to buy */
 			carsList[0].amountOfCar -= 1;
 			if (carsList[0].amountOfCar >= 0)
 			{
-				currentPurchaseTotal = currentPurchaseTotal + carsList[0].carPrice;
-				carsPurchased++;
+				saleToProcess.totalPrice = saleToProcess.totalPrice + carsList[0].carPrice;
+				saleToProcess.numberOfCarsPurchased++;
 				saleToProcess.numberOfToyotaPurchased++;
 				break;
 			}
@@ -326,8 +314,8 @@ user to select how many cars they would like to buy */
 			carsList[1].amountOfCar -= 1;
 			if (carsList[1].amountOfCar >= 0)
 			{
-				currentPurchaseTotal = currentPurchaseTotal + carsList[1].carPrice;
-				carsPurchased++;
+				saleToProcess.totalPrice = saleToProcess.totalPrice + carsList[1].carPrice;
+				saleToProcess.numberOfCarsPurchased++;
 				saleToProcess.numberOfKiaPurchased++;
 				break;
 			}
@@ -344,8 +332,8 @@ user to select how many cars they would like to buy */
 			carsList[2].amountOfCar -= 1;
 			if (carsList[2].amountOfCar >= 0)
 			{
-				currentPurchaseTotal = currentPurchaseTotal + carsList[2].carPrice;
-				carsPurchased++;
+				saleToProcess.totalPrice = saleToProcess.totalPrice + carsList[2].carPrice;
+				saleToProcess.numberOfCarsPurchased++;
 				saleToProcess.numberOfHyundaiPurchased++;
 				break;
 			}
@@ -362,7 +350,7 @@ user to select how many cars they would like to buy */
 			break;
 
 		case '9':
-			checkIfNeedToPurchaseCar = false; // Used to skip all of the car purchase code and writing to a file
+			saleToProcess.numberOfCarsPurchased = 0; // Used to skip all of the car purchase code and writing to a file
 			desireToContinue1 = false; // Allows us to escape this loop
 			break;
 		}
@@ -370,61 +358,80 @@ user to select how many cars they would like to buy */
 	} while (desireToContinue1 == true);
 
 	free(carsList);
+	return saleToProcess;
+}
 
-	if (checkIfNeedToPurchaseCar == true)
+struct purchaseData reciveNameAgeAndCalculateDiscount(struct purchaseData saleToProcess)
+{
+	char fullName[200];
+
+	printf("The total price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
+	printf("The total number of cars you purchased is %d\n", saleToProcess.numberOfCarsPurchased);
+	printf("The number of Toyota you bought is: %d\n", saleToProcess.numberOfToyotaPurchased);
+	printf("The number of Kia you bought is: %d\n", saleToProcess.numberOfKiaPurchased);
+	printf("The number of Hyundai you bought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
+	printf("Please enter your full name\n");
+	scanf(" %[^\n]s", fullName); // Again the holy white space comes to the rescue scans until it hits new line
+	fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
+	strcpy(saleToProcess.customerName, fullName);
+	printf("Please enter your age\n");
+	scanf("%d", &saleToProcess.customerAge);
+
+	if (saleToProcess.customerAge > 60)
 	{
-		printf("The total price of your purchase is: %.2f GBP\n", currentPurchaseTotal);
-		saleToProcess.totalPrice = currentPurchaseTotal;
-		printf("The total number of cars you purchased is %d\n", carsPurchased);
-		saleToProcess.numberOfCarsPurchased = carsPurchased;
-		printf("The number of Toyota you bought is: %d\n", saleToProcess.numberOfToyotaPurchased);
-		printf("The number of Kia you bought is: %d\n", saleToProcess.numberOfKiaPurchased);
-		printf("The number of Hyundai you bought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
-		printf("Please enter your full name\n");
-		scanf(" %[^\n]s", fullName); // Again the holy white space comes to the rescue scans until it hits new line
-		fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
-		strcpy(saleToProcess.customerName, fullName);
-		printf("Please enter your age\n");
-		scanf("%d", &saleToProcess.customerAge);
+		saleToProcess.ifDiscountWasGiven = 'Y';
+		saleToProcess.percentageDiscount = 10;
+		saleToProcess.pricePaid = saleToProcess.totalPrice - (saleToProcess.totalPrice / 10);
+		printf("Due to your age you have been given a 10 percent discount\n");
+		printf("Your new total is %f", saleToProcess.totalPrice);
+	}
+	else
+	{
+		saleToProcess.ifDiscountWasGiven = 'N';
+		saleToProcess.percentageDiscount = 0;
+		saleToProcess.pricePaid = saleToProcess.totalPrice;
+	}
+	return saleToProcess;
+}
 
-		if (saleToProcess.customerAge > 60)
-		{
-			saleToProcess.ifDiscountWasGiven = 'Y';
-			saleToProcess.percentageDiscount = 10;
-			saleToProcess.pricePaid = saleToProcess.totalPrice - (saleToProcess.totalPrice / 10);
-			printf("Due to your age you have been given a 10 percent discount\n");
-			printf("Your new total is %f", saleToProcess.totalPrice);
-		}
-		else
-		{
-			saleToProcess.ifDiscountWasGiven = 'N';
-			saleToProcess.percentageDiscount = 0;
-			saleToProcess.pricePaid = saleToProcess.totalPrice;
-		}
+void writeSaleDataToFile(struct purchaseData saleToProcess)
+{
+	// Now it's time to open the file so we can write to it
+	// https://www.youtube.com/watch?v=7ZFgphYJvUA&ab_channel=PortfolioCourses Used this video as a source
+	FILE* fileData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "a");
+	if (fileData == NULL)
+	{
+		printf("ERROR opening file please\n");
+		return;
 
-		// Now it's time to open the file so we can write to it
-		// https://www.youtube.com/watch?v=7ZFgphYJvUA&ab_channel=PortfolioCourses Used this video as a source
-		FILE* fileData = fopen("testData.txt", "a");
-		if (fileData == NULL)
-		{
-			printf("ERROR opening file please\n");
-			return;
+	}
 
-		}
+	fprintf(fileData, "%.2f,%.2f,%d,%c,%d,%d,%d,%d,%d,%s\n",
+		saleToProcess.totalPrice,
+		saleToProcess.pricePaid,
+		saleToProcess.customerAge,
+		saleToProcess.ifDiscountWasGiven,
+		saleToProcess.percentageDiscount,
+		saleToProcess.numberOfCarsPurchased,
+		saleToProcess.numberOfToyotaPurchased,
+		saleToProcess.numberOfKiaPurchased,
+		saleToProcess.numberOfHyundaiPurchased,
+		saleToProcess.customerName);
 
-		fprintf(fileData, "%.2f,%.2f,%d,%c,%d,%d,%d,%d,%d,%s\n",
-			saleToProcess.totalPrice,
-			saleToProcess.pricePaid,
-			saleToProcess.customerAge,
-			saleToProcess.ifDiscountWasGiven,
-			saleToProcess.percentageDiscount,
-			saleToProcess.numberOfCarsPurchased,
-			saleToProcess.numberOfToyotaPurchased,
-			saleToProcess.numberOfKiaPurchased,
-			saleToProcess.numberOfHyundaiPurchased,
-			saleToProcess.customerName);
+	fclose(fileData);
+}
 
-		fclose(fileData);
+void purchaseACar()
+{
+	struct carsData* carsList = calculateCarsInStock();
+
+	struct purchaseData saleToProcess = establishCarsUserWishesToPurchase(carsList);
+
+	if (saleToProcess.numberOfCarsPurchased > 0)
+	{
+		saleToProcess = reciveNameAgeAndCalculateDiscount(saleToProcess);
+
+		writeSaleDataToFile(saleToProcess);
 	}
 }
 
@@ -461,7 +468,7 @@ void viewAllSalesData()
 
 	/*https://www.youtube.com/watch?v=rbVt5v8NNe8&ab_channel=PortfolioCourses code in this section inspired by this video most of the changes so
 			   far are just changes to variable names to make them fit the program better but this could change as the project progresses*/
-	fileSalesData = fopen("testData.txt", "r");
+	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
 	// specify they full path but remember use two \\ so it doesn't  get confused
 
 	if (fileSalesData == NULL) //Just a nice check to see if the file exists and actually contains anything if not an error is printed
