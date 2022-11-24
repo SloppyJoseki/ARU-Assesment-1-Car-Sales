@@ -1,4 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define TOYOTA_PRICE 21460.60f
+#define KIA_PRICE 14900.00f
+#define HYUNDAI_PRICE 19035.20f
 
 #include "stdio.h"  
 #include "string.h"
@@ -137,7 +140,7 @@ void Bubble_sort(struct totalCarSalesData arr[], int size)
 	}
 }
 
-struct purchaseData* readDataFromFile()
+struct purchaseData* readPurchaseDataFromFile()
 {
 	FILE* fileSalesData;
 	int numberOfLinesInFile = countLinesInFile();
@@ -192,7 +195,7 @@ struct purchaseData* readDataFromFile()
 
 struct carsData* calculateCarsInStock()
 {
-	struct purchaseData* purchases = readDataFromFile();
+	struct purchaseData* purchases = readPurchaseDataFromFile();
 
 	int sizeOfArrayOfPurchases = countLinesInFile();
 
@@ -229,17 +232,17 @@ struct carsData* calculateCarsInStock()
 	}
 
 	strcpy(cars[0].carName, "Toyota");
-	cars[0].carPrice = 21460.60f;
+	cars[0].carPrice = TOYOTA_PRICE;
 	cars[0].amountOfCar = 20 - numberOfToyotaSold;
 
 
 	strcpy(cars[1].carName, "KIA");
-	cars[1].carPrice = 14900.00f;
+	cars[1].carPrice = KIA_PRICE;
 	cars[1].amountOfCar = 20 - numberOfKiaSold;
 
 
 	strcpy(cars[2].carName, "Hyundai");
-	cars[2].carPrice = 19035.20f;
+	cars[2].carPrice = HYUNDAI_PRICE;
 	cars[2].amountOfCar = 20 - numberOfHyundaiSold;
 
 	return cars;
@@ -435,127 +438,12 @@ void purchaseACar()
 	}
 }
 
-void viewAllSalesData()
+void printAllSalesMade(struct purchaseData* purchases)
 {
-	FILE* fileSalesData;
+	int numberOfSales = countLinesInFile();
 
-	struct purchaseData purchases[60];
-
-	struct carsData toyota;
-	strcpy(toyota.carName, "Toyota");
-	toyota.carPrice = 21460.60f;
-
-	struct carsData kia;
-	strcpy(kia.carName, "KIA");
-	kia.carPrice = 14900.00f;
-
-
-	struct carsData hyundai;
-	strcpy(hyundai.carName, "Hyundai");
-	hyundai.carPrice = 19035.20f;
-
-	struct totalCarSalesData toyotaSalesData;
-	strcpy(toyotaSalesData.carBrand, "Toyota");
-	toyotaSalesData.totalCarSales = 0;
-
-	struct totalCarSalesData kiaSalesData;
-	strcpy(kiaSalesData.carBrand, "Kia");
-	kiaSalesData.totalCarSales = 0;
-
-	struct totalCarSalesData hyundaiSalesData;
-	strcpy(hyundaiSalesData.carBrand, "Hyundai");
-	hyundaiSalesData.totalCarSales = 0;
-
-	/*https://www.youtube.com/watch?v=rbVt5v8NNe8&ab_channel=PortfolioCourses code in this section inspired by this video most of the changes so
-			   far are just changes to variable names to make them fit the program better but this could change as the project progresses*/
-	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
-	// specify they full path but remember use two \\ so it doesn't  get confused
-
-	if (fileSalesData == NULL) //Just a nice check to see if the file exists and actually contains anything if not an error is printed
+	for (int i = 0; i < numberOfSales; i++)
 	{
-		printf("ERROR nothing in file\n");
-		return;
-	}
-
-	int valuesRead = 0;
-	int valuesRecorded = 0;
-
-	do
-	{
-		/* This is the main difference between video code and my code I need to read and store different things to him*/
-		valuesRead = fscanf(fileSalesData, "%f, %f, %d, %c, %d, %d, %d, %d, %d, %50[^\n]",
-			&purchases[valuesRecorded].totalPrice,
-			&purchases[valuesRecorded].pricePaid,
-			&purchases[valuesRecorded].customerAge,
-			&purchases[valuesRecorded].ifDiscountWasGiven,
-			&purchases[valuesRecorded].percentageDiscount,
-			&purchases[valuesRecorded].numberOfCarsPurchased,
-			&purchases[valuesRecorded].numberOfToyotaPurchased,
-			&purchases[valuesRecorded].numberOfKiaPurchased,
-			&purchases[valuesRecorded].numberOfHyundaiPurchased,
-			&purchases[valuesRecorded].customerName);
-
-		if (valuesRead == 10) // A nice little check to see if on each line the correct information is read there are 10 things so check for 10 
-		{
-			valuesRecorded++;
-		}
-
-		if (valuesRead != 10 && !feof(fileSalesData)) // Assuming the end of the file isn't hit if 10 things are not read per line formatting issue
-		{
-			printf("ERROR formatting issue in file please try to fix\n");
-			return;
-		}
-
-		if (ferror(fileSalesData)) // More error checking makinging sure any non correct cases are caught
-		{
-			printf("ERROR file error\n");
-			return;
-		}
-
-	} while (!feof(fileSalesData)); //feof will return True once we reach the end of the file thus ending the loop
-
-	fclose(fileSalesData); // Close the file it would be rude to always keep it open
-
-	printf("number of records read: %d\n\n", valuesRecorded); // It's good to know how much stuff we are dealing with especially with the 60 limit
-
-	for (int i = 0; i < valuesRecorded; i++) // Simple loop to print out all the stored information on each sale
-	{
-		if (purchases[i].numberOfToyotaPurchased > 0)
-		{
-			if (purchases[i].percentageDiscount != 10)
-			{
-				toyotaSalesData.totalCarSales += (toyota.carPrice * purchases[i].numberOfToyotaPurchased);
-			}
-			else if (purchases[i].percentageDiscount == 10)
-			{
-				toyotaSalesData.totalCarSales += ((toyota.carPrice - (toyota.carPrice / 10)) * purchases[i].numberOfToyotaPurchased);
-			}
-		}
-
-		if (purchases[i].numberOfKiaPurchased > 0)
-		{
-			if (purchases[i].percentageDiscount != 10)
-			{
-				kiaSalesData.totalCarSales += (kia.carPrice * purchases[i].numberOfKiaPurchased);
-			}
-			else if (purchases[i].percentageDiscount == 10)
-			{
-				kiaSalesData.totalCarSales += ((kia.carPrice - (kia.carPrice / 10)) * purchases[i].numberOfKiaPurchased);
-			}
-		}
-
-		if (purchases[i].numberOfHyundaiPurchased > 0)
-		{
-			if (purchases[i].percentageDiscount != 10)
-			{
-				hyundaiSalesData.totalCarSales += (hyundai.carPrice * purchases[i].numberOfHyundaiPurchased);
-			}
-			else if (purchases[i].percentageDiscount == 10)
-			{
-				hyundaiSalesData.totalCarSales += ((hyundai.carPrice - (hyundai.carPrice / 10)) * purchases[i].numberOfHyundaiPurchased);
-			}
-		}
-
 		printf("total price: %.2f GBP\n price paid: %.2f GBP\n customers name: %s\n customers age: %d\n if discount was given: %c\n percentage discount: %d\n number of "
 			"cars purchased: %d\n number of Toyota purchased: %d\n number of Kia purchased: %d\n number of Hyundai purchased %d\n",
 			purchases[i].totalPrice,
@@ -571,6 +459,65 @@ void viewAllSalesData()
 		printf("\n");
 	}
 
+}
+
+void printSortedProfitForEachBrand(struct purchaseData* purchases)
+{
+	struct totalCarSalesData toyotaSalesData;
+	strcpy(toyotaSalesData.carBrand, "Toyota");
+	toyotaSalesData.totalCarSales = 0;
+
+	struct totalCarSalesData kiaSalesData;
+	strcpy(kiaSalesData.carBrand, "Kia");
+	kiaSalesData.totalCarSales = 0;
+
+	struct totalCarSalesData hyundaiSalesData;
+	strcpy(hyundaiSalesData.carBrand, "Hyundai");
+	hyundaiSalesData.totalCarSales = 0;
+
+	int numberOfSales = countLinesInFile();
+
+
+	for (int i = 0; i < numberOfSales; i++)
+	{
+		if (purchases[i].numberOfToyotaPurchased > 0)
+		{
+			if (purchases[i].percentageDiscount != 10)
+			{
+				toyotaSalesData.totalCarSales += (TOYOTA_PRICE * purchases[i].numberOfToyotaPurchased);
+			}
+			else if (purchases[i].percentageDiscount == 10)
+			{
+				toyotaSalesData.totalCarSales += ((TOYOTA_PRICE - (TOYOTA_PRICE / 10)) * purchases[i].numberOfToyotaPurchased);
+			}
+		}
+
+		if (purchases[i].numberOfKiaPurchased > 0)
+		{
+			if (purchases[i].percentageDiscount != 10)
+			{
+				kiaSalesData.totalCarSales += (KIA_PRICE * purchases[i].numberOfKiaPurchased);
+			}
+			else if (purchases[i].percentageDiscount == 10)
+			{
+				kiaSalesData.totalCarSales += ((KIA_PRICE - (KIA_PRICE / 10)) * purchases[i].numberOfKiaPurchased);
+			}
+		}
+
+		if (purchases[i].numberOfHyundaiPurchased > 0)
+		{
+			if (purchases[i].percentageDiscount != 10)
+			{
+				hyundaiSalesData.totalCarSales += (HYUNDAI_PRICE * purchases[i].numberOfHyundaiPurchased);
+			}
+			else if (purchases[i].percentageDiscount == 10)
+			{
+				hyundaiSalesData.totalCarSales += ((HYUNDAI_PRICE - (HYUNDAI_PRICE / 10)) * purchases[i].numberOfHyundaiPurchased);
+			}
+		}
+	}
+
+
 	/* Using an array of structs because it makes the sorting and printing easier when two of them happen to have the same value such as
 	£0 as just using if statements can lead to the program printing the same name for multiple of the cars*/
 	struct totalCarSalesData carSalesList[] = { toyotaSalesData, kiaSalesData, hyundaiSalesData };
@@ -580,5 +527,16 @@ void viewAllSalesData()
 	printf("We have made %.2f GBP from %s\n", carSalesList[0].totalCarSales, carSalesList[0].carBrand);
 	printf("We have made %.2f GBP from %s\n", carSalesList[1].totalCarSales, carSalesList[1].carBrand);
 	printf("We have made %.2f GBP from %s\n", carSalesList[2].totalCarSales, carSalesList[2].carBrand);
+
+
+}
+
+
+void viewAllSalesData()
+{
+	struct purchaseData* purchases = readPurchaseDataFromFile();
+
+	printAllSalesMade(purchases);
+	printSortedProfitForEachBrand(purchases);
 
 }
