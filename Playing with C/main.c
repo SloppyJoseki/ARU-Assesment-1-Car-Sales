@@ -24,7 +24,7 @@ int main()
 		printf("\n");
 
 		// Takes the users input for the switch statement as mentioned previously will ensure the user only enters something valid
-		char selectedChoice = reciveCheckedInput();
+		char selectedChoice = validateInputForFirstMenu();
 
 		switch (selectedChoice)
 		{

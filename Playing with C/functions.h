@@ -7,7 +7,6 @@
 #include "string.h"
 #include "malloc.h"
 
-
 typedef enum { false = 0, true = 1 } bool;
 
 struct carsData
@@ -37,12 +36,11 @@ struct totalCarSalesData
 	float totalCarSales;
 };
 
-
 /* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the user
 fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each itteration so the user is unable to
 mess with subsequent inputs */
 
-char reciveCheckedInput()
+char validateInputForFirstMenu()
 {
 	char menuOption;
 	do
@@ -60,8 +58,7 @@ char reciveCheckedInput()
 	} while (true);
 }
 
-
-char reciveCheckedInput1()
+char validateInputForSecondMenu()
 {
 	char menuOption1;
 	do
@@ -291,7 +288,7 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 		/*Using the code from DealingWithUserInput to ensure that the character input is properly validatedand no matter what is typed
 		  everything will work out all good same as above */
 
-		char menuOption1 = reciveCheckedInput1();
+		char menuOption1 = validateInputForSecondMenu();
 
 		switch (menuOption1)
 		{
@@ -530,7 +527,6 @@ void printSortedProfitForEachBrand(struct purchaseData* purchases)
 
 
 }
-
 
 void viewAllSalesData()
 {
