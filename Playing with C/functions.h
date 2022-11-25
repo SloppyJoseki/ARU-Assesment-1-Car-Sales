@@ -137,7 +137,7 @@ void Bubble_sort(struct totalCarSalesData arr[], int size)
 	}
 }
 
-struct purchaseData* readPurchaseDataFromFile()
+struct purchaseData* readPurchaseDataFromFileIntoArray()
 {
 	FILE* fileSalesData;
 	int numberOfLinesInFile = countLinesInFile();
@@ -192,7 +192,7 @@ struct purchaseData* readPurchaseDataFromFile()
 
 struct carsData* calculateCarsInStock()
 {
-	struct purchaseData* purchases = readPurchaseDataFromFile();
+	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 
 	int sizeOfArrayOfPurchases = countLinesInFile();
 
@@ -530,9 +530,10 @@ void printSortedProfitForEachBrand(struct purchaseData* purchases)
 
 void viewAllSalesData()
 {
-	struct purchaseData* purchases = readPurchaseDataFromFile();
+	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 
 	printAllSalesMade(purchases);
 	printSortedProfitForEachBrand(purchases);
+	free(purchases);
 
 }
