@@ -15,6 +15,7 @@ int main()
 
 	do
 	{
+		// Prints the main menu 
 		printf("\n\n\n");
 		printf("Please enter the number of the menu item you wish to select!\n");
 		printf("1. View stock of cars\n");
@@ -23,7 +24,7 @@ int main()
 		printf("4. Exit\n");
 		printf("\n");
 
-		// Takes the users input for the switch statement as mentioned previously will ensure the user only enters something valid
+		// Takes the users input for the switch statement will ensure the user only enters something valid
 		char selectedChoice = validateInputForFirstMenu();
 
 		switch (selectedChoice)
@@ -39,11 +40,15 @@ int main()
 
 		case '2':
 			system("cls");
+
+			// Runs all the relevant car purchase functions 
 			purchaseACar();
 			break;
 
 		case '3':
 			system("cls");
+
+			// Prints all the previous sales data
 			viewAllSalesData();
 			break;
 

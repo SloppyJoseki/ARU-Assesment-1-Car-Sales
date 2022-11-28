@@ -4,19 +4,19 @@
 #define HYUNDAI_PRICE 19035.20f
 
 #include "stdio.h"  
-#include "string.h"
-#include "malloc.h"
+#include "string.h" // Used to make interacting with strings easier in partiular strcpy
+#include "stdlib.h" // Used for malloc to help control memory
 
-typedef enum { false = 0, true = 1 } bool;
+typedef enum { false = 0, true = 1 } bool; // Creating a new variable type bool that just asines true and false values to improve readability
 
-struct carsData
+struct carsData // The basic way to store simple information about the cars this program interacts with
 {
 	char carName[15];
 	float carPrice;
 	int amountOfCar;
 };
 
-struct purchaseData
+struct purchaseData // When interacting with the data from the file its easy to store it all in an array of these structs
 {
 	float totalPrice;
 	float pricePaid;
@@ -30,17 +30,17 @@ struct purchaseData
 	int numberOfHyundaiPurchased;
 };
 
-struct totalCarSalesData
+struct totalCarSalesData // Used to help connect the amount each car has made with the name to make sorting and printing everything easier
 {
 	char carBrand[15];
 	float totalCarSales;
 };
 
-/* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the user
-fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each itteration so the user is unable to
-mess with subsequent inputs */
 
 char validateInputForFirstMenu()
+/* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the 
+user fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each itteration so the user is unable to
+mess with subsequent inputs */
 {
 	char menuOption;
 	do
@@ -59,6 +59,7 @@ char validateInputForFirstMenu()
 }
 
 char validateInputForSecondMenu()
+// Same as above but for the second menu so it requires different inputs
 {
 	char menuOption1;
 	do
@@ -78,26 +79,28 @@ char validateInputForSecondMenu()
 }
 
 int countLinesInFile()
+// Useful for determaning how much sale data is the the file as in the csv format each sale is seperated by a new line
+// https://www.geeksforgeeks.org/c-program-count-number-lines-file/
 {
 	FILE* fp;
 	int count = 0;
 	char c;
 
-	fp = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
+	fp = fopen("testData.txt", "r");
 
-	for (c = getc(fp); c != EOF; c = getc(fp))
-		if (c == '\n') // Increment count if this character is newline
+	for (c = getc(fp); c != EOF; c = getc(fp)) // Goes through each character in the file
+		if (c == '\n') // Counts up if this character is newline
 			count = count + 1;
 
 	fclose(fp);
-	return count;
+	return count; // Returns the count of every newline character in the file
 }
 
-/* Simple insertion sort https://www.youtube.com/watch?v=Tz7vBodZqo8&ab_channel=PortfolioCourses based on this code. A temporary struct is created in order
-to allow the swapping of structs inside an array and then the algorithm goes through and divides the array into a sorted subarray and then the larger array
-itself. This particular method of sorting is very efficient when there are not many things to sort so its perfect for the small number of cars */
-
 void insertionSort(struct carsData a[], int lengthOfArray)
+/* Simple insertion sort https://www.youtube.com/watch?v=Tz7vBodZqo8&ab_channel=PortfolioCourses based on this code. A temporary struct is created in
+order to allow the swapping of structs inside an array and then the algorithm goes through and divides the array into a sorted subarray and then the
+larger array itself. This particular method of sorting is very efficient when there are not many things to sort so its perfect for the small number 
+of cars */
 {
 	struct carsData temp;
 
@@ -119,6 +122,8 @@ void insertionSort(struct carsData a[], int lengthOfArray)
 
 void Bubble_sort(struct totalCarSalesData arr[], int size)
 // http://www.cprogrammingnotes.com/question/sorting-structure-array.html used to help implement the bubble sort
+/* Uses a temporary struct to allow the swaping of cars unfortunetly the previous sorting function can't be resued since a different kind of struct
+ is being worked with  */
 {
 	struct totalCarSalesData temporary;
 	int i, j;
@@ -141,12 +146,13 @@ struct purchaseData* readPurchaseDataFromFileIntoArray()
 {
 	FILE* fileSalesData;
 	int numberOfLinesInFile = countLinesInFile();
+	// Uses the number of lines in the file (aka number of sales) to determine the size of the array
 	struct purchaseData* purchases = malloc(sizeof(struct purchaseData) * numberOfLinesInFile);
 	if (purchases == NULL)
 	{
 		return;
 	}
-	fileSalesData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "r");
+	fileSalesData = fopen("testData.txt", "r");
 
 	if (fileSalesData != NULL)
 	{
@@ -183,23 +189,25 @@ struct purchaseData* readPurchaseDataFromFileIntoArray()
 			}
 
 		} while (!feof(fileSalesData));
+		// While its not the end of the file loop through and read all of the sales data into the array of structs
 
 		fclose(fileSalesData);
 
-		return purchases;
+		return purchases; // Return the array of sales for use by other functions
 	}
 }
 
 struct carsData* calculateCarsInStock()
 {
+	// Sets up the array of purchases and the variables used to store how many cars of each type have been sold
 	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
-
-	int sizeOfArrayOfPurchases = countLinesInFile();
+	int sizeOfArrayOfPurchases = countLinesInFile(); // Again used to help know how many sales have been made so a loop can run through it
 
 	int numberOfToyotaSold = 0;
 	int numberOfKiaSold = 0;
 	int numberOfHyundaiSold = 0;
 
+	// For loop goes through the array of purchases and increments the counters acording to the number of cars sold in each sale
 	for (int i = 0; i < sizeOfArrayOfPurchases; i++)
 	{
 		if (purchases[i].numberOfToyotaPurchased != 0)
@@ -219,15 +227,16 @@ struct carsData* calculateCarsInStock()
 
 	}
 
-	free(purchases);
+	free(purchases); // free the memory
 
-	struct carsData* cars = malloc(sizeof(struct carsData) * 3);
+	struct carsData* cars = malloc(sizeof(struct carsData) * 3); // Makes an array of the cars struct only 3 types of cars in the shop so its size 3
 
 	if (cars == NULL)
 	{
 		return;
 	}
 
+	// Sets up all the information about cars in the array the max stock for each is 20 so subtract the number sold to get amount left
 	strcpy(cars[0].carName, "Toyota");
 	cars[0].carPrice = TOYOTA_PRICE;
 	cars[0].amountOfCar = 20 - numberOfToyotaSold;
@@ -242,14 +251,15 @@ struct carsData* calculateCarsInStock()
 	cars[2].carPrice = HYUNDAI_PRICE;
 	cars[2].amountOfCar = 20 - numberOfHyundaiSold;
 
-	return cars;
+	return cars; // Returns the array of cars for use in other functions
 }
 
 void viewStockOfCars()
 {
-	struct carsData* carsList = calculateCarsInStock();
-	insertionSort(carsList, 3);
+	struct carsData* carsList = calculateCarsInStock(); // Calculates the number of cars in stock with previous function
+	insertionSort(carsList, 3); // Sorts that array with the insertion sort
 
+	// Prints all cars in stock
 	printf("Here is a list of our stock of cars!\n");
 	for (int i = 0; i < 3; i++)
 	{
@@ -257,7 +267,7 @@ void viewStockOfCars()
 		printf("We have %d %s's in stock and they cost %.2f GBP each\n", carsList[i].amountOfCar, carsList[i].carName, carsList[i].carPrice);
 	}
 	printf("\n");
-	free(carsList);
+	free(carsList); // Free the momory taken up by carsList to prevent any memory issues
 }
 
 struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
@@ -276,6 +286,8 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 
 	bool desireToContinue1 = true;
 
+	/* Using another looping menu to see how many cars the user wishes to purchase since cars are not something one generaly buys a lot of at once it 
+	seems easier to do it in this simple way rather than have the user enter a number for each and every car type */
 	do
 	{
 		printf("Please select the car model you wish to buy!\n");
@@ -358,11 +370,12 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 	} while (desireToContinue1 == true);
 
 	free(carsList);
-	return saleToProcess;
+	return saleToProcess; // Returns the struct set up with all the cars related information 
 }
 
 struct purchaseData reciveNameAgeAndCalculateDiscount(struct purchaseData saleToProcess)
 {
+	// This function sets up all the rest of the data for a sale such as user name ect
 	char fullName[200];
 
 	printf("The total price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
@@ -396,9 +409,9 @@ struct purchaseData reciveNameAgeAndCalculateDiscount(struct purchaseData saleTo
 
 void writeSaleDataToFile(struct purchaseData saleToProcess)
 {
-	// Now it's time to open the file so we can write to it
+	// Simply writes all the data from the given sale into the file to save it
 	// https://www.youtube.com/watch?v=7ZFgphYJvUA&ab_channel=PortfolioCourses Used this video as a source
-	FILE* fileData = fopen("C:\\Users\\Harry\\source\\repos\\Playing with C\\Playing with C\\testData.txt", "a");
+	FILE* fileData = fopen("testData.txt", "a");
 	if (fileData == NULL)
 	{
 		printf("ERROR opening file please\n");
@@ -423,6 +436,7 @@ void writeSaleDataToFile(struct purchaseData saleToProcess)
 
 void purchaseACar()
 {
+	// The culmination of many functions simply executes them all in order to perform the entire buy a car and write to file process
 	struct carsData* carsList = calculateCarsInStock();
 
 	struct purchaseData saleToProcess = establishCarsUserWishesToPurchase(carsList);
@@ -437,6 +451,7 @@ void purchaseACar()
 
 void printAllSalesMade(struct purchaseData* purchases)
 {
+	// Feed in teh array of all purchases and loop through to print out all the details
 	int numberOfSales = countLinesInFile();
 
 	for (int i = 0; i < numberOfSales; i++)
@@ -474,6 +489,7 @@ void printSortedProfitForEachBrand(struct purchaseData* purchases)
 
 	int numberOfSales = countLinesInFile();
 
+	// The loop goes through and checks each sale for what cars have been purchased with what discounts and adds them up for each type of car
 
 	for (int i = 0; i < numberOfSales; i++)
 	{
@@ -530,6 +546,7 @@ void printSortedProfitForEachBrand(struct purchaseData* purchases)
 
 void viewAllSalesData()
 {
+	// Runs the two previous functions to print all the data and print the sorted cars sales data
 	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 
 	printAllSalesMade(purchases);
