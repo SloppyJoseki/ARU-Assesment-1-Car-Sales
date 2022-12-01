@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+// Prices based on googling for random cars these brands sell
 #define TOYOTA_PRICE 21460.60f
 #define KIA_PRICE 14900.00f
 #define HYUNDAI_PRICE 19035.20f
@@ -6,8 +7,9 @@
 #include "stdio.h"  
 #include "string.h" // Used to make interacting with strings easier in partiular strcpy
 #include "stdlib.h" // Used for malloc to help control memory
+#include <ctype.h>
 
-typedef enum { false = 0, true = 1 } bool; // Creating a new variable type bool that just asines true and false values to improve readability
+typedef enum { false = 0, true = 1 } bool; // Creating a new variable type bool that just assigns true and false values to improve readability
 
 struct carsData // The basic way to store simple information about the cars this program interacts with
 {
@@ -30,12 +32,11 @@ struct purchaseData // When interacting with the data from the file its easy to 
 	int numberOfHyundaiPurchased;
 };
 
-struct totalCarSalesData // Used to help connect the amount each car has made with the name to make sorting and printing everything easier
+struct totalCarSalesData
 {
 	char carBrand[15];
 	float totalCarSales;
 };
-
 
 char validateInputForFirstMenu()
 /* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the 
@@ -61,13 +62,13 @@ mess with subsequent inputs */
 char validateInputForSecondMenu()
 // Same as above but for the second menu so it requires different inputs
 {
-	char menuOption1;
+	char menuOption2;
 	do
 	{
-		scanf("\n%c", &menuOption1);
-		if (menuOption1 == '5' || menuOption1 == '6' || menuOption1 == '7' || menuOption1 == '8' || menuOption1 == '9')
+		scanf("\n%c", &menuOption2);
+		if (menuOption2 == '5' || menuOption2 == '6' || menuOption2 == '7' || menuOption2 == '8' || menuOption2 == '9')
 		{
-			return menuOption1;
+			return menuOption2;
 		}
 		else
 		{
@@ -76,6 +77,41 @@ char validateInputForSecondMenu()
 		while (getchar() != '\n');
 	} while (true);
 
+}
+
+int validateUserAge()
+{
+	int userAge;
+	do
+	{
+		int check = scanf("\n%d", &userAge);
+		if (check == 1 && userAge < 150 && userAge > 16) // 17 is normal uk driving age but 16 year olds can technically drive with gov permit
+		{
+			return userAge;
+		}
+		else
+		{
+			printf("Please enter a valid age\n");
+		}
+		while (getchar() != '\n');
+	} while (true);
+}
+
+void checkDataFileExsists()
+{
+	FILE* fp;
+	fp = fopen("testData.txt", "r");
+	if (fp == NULL) // If the file does not exsist will be equal to NULL so open it in write mode and it will be created by default
+	{
+		fp = fopen("testData.txt", "w");
+		fclose(fp);
+		return;
+	}
+	else
+	{
+		fclose(fp);
+		return;
+	}
 }
 
 int countLinesInFile()
@@ -200,8 +236,9 @@ struct purchaseData* readPurchaseDataFromFileIntoArray()
 struct carsData* calculateCarsInStock()
 {
 	// Sets up the array of purchases and the variables used to store how many cars of each type have been sold
-	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 	int sizeOfArrayOfPurchases = countLinesInFile(); // Again used to help know how many sales have been made so a loop can run through it
+	
+	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 
 	int numberOfToyotaSold = 0;
 	int numberOfKiaSold = 0;
@@ -378,7 +415,7 @@ struct purchaseData reciveNameAgeAndCalculateDiscount(struct purchaseData saleTo
 	// This function sets up all the rest of the data for a sale such as user name ect
 	char fullName[200];
 
-	printf("The total price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
+	printf("The total undiscounted price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
 	printf("The total number of cars you purchased is %d\n", saleToProcess.numberOfCarsPurchased);
 	printf("The number of Toyota you bought is: %d\n", saleToProcess.numberOfToyotaPurchased);
 	printf("The number of Kia you bought is: %d\n", saleToProcess.numberOfKiaPurchased);
@@ -388,7 +425,7 @@ struct purchaseData reciveNameAgeAndCalculateDiscount(struct purchaseData saleTo
 	fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
 	strcpy(saleToProcess.customerName, fullName);
 	printf("Please enter your age\n");
-	scanf("%d", &saleToProcess.customerAge);
+	saleToProcess.customerAge = validateUserAge();
 
 	if (saleToProcess.customerAge > 60)
 	{
