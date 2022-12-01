@@ -7,7 +7,15 @@ int main()
 	// Sometime when the data is manualy cleared from the file the program tries to read a blank line as data and it breaks
 	// The control variable for the main do while loop that keeps the program running until the user wants to exit
 	bool desireToContinue = true;
-	checkDataFileExsists(); // Makes sure the file exsists so we can use it for everything else
+	bool doesTheFileExsist = checkDataFileExsists(); // Makes sure the file exsists so we can use it for everything else
+
+	if (doesTheFileExsist == false) // If the text file does not exsist then the program can't run so tell the user why and end it
+	{
+		printf("Your computer has stoped this program from creating the file carSaleData.txt this is needed for the program to run");
+		printf(" you can either fix your permissions or manualy create the file\n");
+		return 1;
+	}
+
 	// Program greets the user upon first running
 	printf("Welcome to Otto's Automobiles!\n");
 
