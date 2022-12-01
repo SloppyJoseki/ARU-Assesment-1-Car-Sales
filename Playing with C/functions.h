@@ -110,6 +110,8 @@ bool checkDataFileExsists()
 		fp = fopen("carSaleData.txt", "w");
 
 	}
+	fclose(fp);
+	fp = fopen("carSaleData.txt", "r");
 
 	if (fp == NULL) // Check again to make sure the creation went ok as if it failed so will the whole program
 	{
