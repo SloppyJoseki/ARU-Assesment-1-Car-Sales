@@ -4,10 +4,9 @@
 #define KIA_PRICE 14900.00f
 #define HYUNDAI_PRICE 19035.20f
 
-#include "stdio.h"  
-#include "string.h" // Used to make interacting with strings easier in partiular strcpy
-#include "stdlib.h" // Used for malloc to help control memory
-#include <ctype.h>
+#include <stdio.h>  // Used for input and output 
+#include <string.h> // Used to make interacting with strings easier in partiular strcpy
+#include <stdlib.h> // Used for malloc to help control memory
 
 typedef enum { false = 0, true = 1 } bool; // Creating a new variable type bool that just assigns true and false values to improve readability
 
@@ -81,14 +80,19 @@ char validateInputForSecondMenu()
 
 int validateUserAge()
 {
+	// Inspiration from https://www.youtube.com/watch?v=feUTrLz7l8k&ab_channel=GodfredTech
 	int userAge;
 	do
 	{
+		// scanf returns a value for everything it scans so if thats 1 it means it read an int correctly 
 		int check = scanf("\n%d", &userAge);
-		if (check == 1 && userAge < 150 && userAge > 16) // 17 is normal uk driving age but 16 year olds can technically drive with gov permit
+		if (check == 1 && userAge < 150 && userAge > 16)
 		{
+			/* 17 is normal uk driving age but 16 year olds can technically drive with gov permit. The longest documented human life was 126 years
+			but the upper check mainly exsists to stop someone inputing something larger than an int can deal with */
 			return userAge;
 		}
+		// Reusing the other validate input code
 		else
 		{
 			printf("Please enter a valid age\n");
@@ -100,10 +104,10 @@ int validateUserAge()
 void checkDataFileExsists()
 {
 	FILE* fp;
-	fp = fopen("testData.txt", "r");
+	fp = fopen("carSaleData.txt", "r");
 	if (fp == NULL) // If the file does not exsist will be equal to NULL so open it in write mode and it will be created by default
 	{
-		fp = fopen("testData.txt", "w");
+		fp = fopen("carSaleData.txt", "w");
 		fclose(fp);
 		return;
 	}
@@ -122,7 +126,7 @@ int countLinesInFile()
 	int count = 0;
 	char c;
 
-	fp = fopen("testData.txt", "r");
+	fp = fopen("carSaleData.txt", "r");
 
 	for (c = getc(fp); c != EOF; c = getc(fp)) // Goes through each character in the file
 		if (c == '\n') // Counts up if this character is newline
@@ -188,7 +192,7 @@ struct purchaseData* readPurchaseDataFromFileIntoArray()
 	{
 		return;
 	}
-	fileSalesData = fopen("testData.txt", "r");
+	fileSalesData = fopen("carSaleData.txt", "r");
 
 	if (fileSalesData != NULL)
 	{
@@ -448,7 +452,7 @@ void writeSaleDataToFile(struct purchaseData saleToProcess)
 {
 	// Simply writes all the data from the given sale into the file to save it
 	// https://www.youtube.com/watch?v=7ZFgphYJvUA&ab_channel=PortfolioCourses Used this video as a source
-	FILE* fileData = fopen("testData.txt", "a");
+	FILE* fileData = fopen("carSaleData.txt", "a");
 	if (fileData == NULL)
 	{
 		printf("ERROR opening file please\n");

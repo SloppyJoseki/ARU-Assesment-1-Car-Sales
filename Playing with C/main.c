@@ -1,8 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h>  
-#include <string.h>
-#include <stdlib.h>
 #include "functions.h"
 
 int main()
@@ -11,7 +8,6 @@ int main()
 	// The control variable for the main do while loop that keeps the program running until the user wants to exit
 	bool desireToContinue = true;
 	checkDataFileExsists(); // Makes sure the file exsists so we can use it for everything else
-
 	// Program greets the user upon first running
 	printf("Welcome to Otto's Automobiles!\n");
 
