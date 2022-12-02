@@ -1,7 +1,3 @@
-#include <stdio.h>  // Used for input and output 
-#include <string.h> // Used to make interacting with strings easier in partiular strcpy
-#include <stdlib.h> // Used for malloc to help control memory
-
 
 void printAllSalesMade(struct purchaseData* purchases)
 {

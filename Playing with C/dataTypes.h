@@ -4,6 +4,7 @@
 #define HYUNDAI_PRICE 19035.20f
 
 typedef enum { false = 0, true = 1 } bool;
+
 struct carsData // The basic way to store simple information about the cars this program interacts with
 {
 	char carName[15];

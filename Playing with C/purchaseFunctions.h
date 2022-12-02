@@ -1,7 +1,3 @@
-#include <stdio.h>  // Used for input and output 
-#include <string.h> // Used to make interacting with strings easier in partiular strcpy
-#include <stdlib.h> // Used for malloc to help control memory
-
 
 struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 {
@@ -106,23 +102,35 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 	return saleToProcess; // Returns the struct set up with all the cars related information 
 }
 
-struct purchaseData receiveNameAgeAndCalculateDiscount(struct purchaseData saleToProcess)
+struct purchaseData printSaleInformation(struct purchaseData saleToProcess)
 {
-	// This function sets up all the rest of the data for a sale such as user name ect
-	char fullName[200];
-
 	printf("The total undiscounted price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
 	printf("The total number of cars you purchased is %d\n", saleToProcess.numberOfCarsPurchased);
 	printf("The number of Toyota you bought is: %d\n", saleToProcess.numberOfToyotaPurchased);
 	printf("The number of Kia you bought is: %d\n", saleToProcess.numberOfKiaPurchased);
 	printf("The number of Hyundai you bought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
+	return saleToProcess;
+}
+
+struct purchaseData takeUserName(struct purchaseData saleToProcess)
+{
+	char fullName[200];
 	printf("Please enter your full name\n");
 	scanf(" %[^\n]s", fullName); // Again the holy white space comes to the rescue scans until it hits new line
 	fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
 	strcpy(saleToProcess.customerName, fullName);
+	return saleToProcess;
+}
+
+struct purchaseData takeUserAge(struct purchaseData saleToProcess)
+{
 	printf("Please enter your age\n");
 	saleToProcess.customerAge = validateUserAge();
+	return saleToProcess;
+}
 
+struct purchaseData checkforDiscount(struct purchaseData saleToProcess)
+{
 	if (saleToProcess.customerAge > 60)
 	{
 		saleToProcess.ifDiscountWasGiven = 'Y';
@@ -176,7 +184,10 @@ void purchaseACar()
 
 	if (saleToProcess.numberOfCarsPurchased > 0)
 	{
-		saleToProcess = receiveNameAgeAndCalculateDiscount(saleToProcess);
+		saleToProcess = printSaleInformation(saleToProcess);
+		saleToProcess = takeUserName(saleToProcess);
+		saleToProcess = takeUserAge(saleToProcess);
+		saleToProcess = checkforDiscount(saleToProcess);
 
 		writeSaleDataToFile(saleToProcess);
 	}
