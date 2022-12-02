@@ -130,7 +130,11 @@
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h" />
+    <ClInclude Include="dataTypes.h" />
+    <ClInclude Include="generalFunctions.h" />
+    <ClInclude Include="purchaseFunctions.h" />
+    <ClInclude Include="salesDataFunctions.h" />
+    <ClInclude Include="stockFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

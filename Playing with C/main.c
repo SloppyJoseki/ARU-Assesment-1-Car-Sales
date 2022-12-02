@@ -1,6 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "functions.h"
+#include "generalFunctions.h"
+#include "stockFunctions.h"
+#include "purchaseFunctions.h"
+#include "salesDataFunctions.h"
 
 int main()
 {
