@@ -102,14 +102,13 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 	return saleToProcess; // Returns the struct set up with all the cars related information 
 }
 
-struct purchaseData printSaleInformation(struct purchaseData saleToProcess)
+void printSaleInformation(struct purchaseData saleToProcess)
 {
 	printf("The total undiscounted price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
 	printf("The total number of cars you purchased is %d\n", saleToProcess.numberOfCarsPurchased);
 	printf("The number of Toyota you bought is: %d\n", saleToProcess.numberOfToyotaPurchased);
 	printf("The number of Kia you bought is: %d\n", saleToProcess.numberOfKiaPurchased);
 	printf("The number of Hyundai you bought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
-	return saleToProcess;
 }
 
 struct purchaseData takeUserName(struct purchaseData saleToProcess)
@@ -184,7 +183,7 @@ void purchaseACar()
 
 	if (saleToProcess.numberOfCarsPurchased > 0)
 	{
-		saleToProcess = printSaleInformation(saleToProcess);
+		printSaleInformation(saleToProcess);
 		saleToProcess = takeUserName(saleToProcess);
 		saleToProcess = takeUserAge(saleToProcess);
 		saleToProcess = checkforDiscount(saleToProcess);
