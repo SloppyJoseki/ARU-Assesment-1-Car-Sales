@@ -41,21 +41,21 @@ int main()
 		case '1':
 
 			// Clears the screen of all previous output then runs the view stock function
-			system("cls");
+			clearTheScreen();
 			// Runs the function to display the name, price and number remaning for each type of car sorted in decending order
 			 viewStockOfCars();
 			 
 			break;
 
 		case '2':
-			system("cls");
+			clearTheScreen();
 
 			// Runs all the relevant car purchase functions 
 			purchaseACar();
 			break;
 
 		case '3':
-			system("cls");
+			clearTheScreen();
 
 			// Prints all the previous sales data
 			viewAllSalesData();

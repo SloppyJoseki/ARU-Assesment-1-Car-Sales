@@ -3,6 +3,11 @@
 #include <stdlib.h> // Used for malloc to help control memory
 #include "dataTypes.h"
 
+void clearTheScreen() // Makes it a bit tidier and also would allow an easy change for other systems where this might not work
+{
+	system("cls");
+}
+
 char validateInputForFirstMenu()
 /* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the
 user fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each itteration so the user is unable to
@@ -74,7 +79,6 @@ bool checkDataFileExsists()
 	if (fp == NULL) // If the file does not exsist will be equal to NULL so open it in write mode and it will be created by default
 	{
 		fp = fopen("carSaleData.txt", "w");
-
 	}
 	fclose(fp);
 	fp = fopen("carSaleData.txt", "r");

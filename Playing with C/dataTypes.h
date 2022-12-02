@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 // Prices based on googling for random cars these brands sell
 #define TOYOTA_PRICE 21460.60f
 #define KIA_PRICE 14900.00f
