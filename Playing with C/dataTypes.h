@@ -5,14 +5,15 @@
 
 typedef enum { false = 0, true = 1 } bool; // Defining a bool type variable with false and true to improve code readability
 
-struct carsData // The basic way to store simple information about the cars this program interacts with
+// The Pluralsight corse "Using storage classes in C" made me aware I can use typedef in my structs so I don't have to type struct every time I use them
+typedef struct carsData  // The basic way to store simple information about the cars this program interacts with
 {
 	char carName[15];
 	float carPrice;
 	int amountOfCar;
-};
+}carsData;
 
-struct purchaseData // When interacting with the data from the file its easy to store it all in an array of these structs
+typedef struct purchaseData // When interacting with the data from the file its easy to store it all in an array of these structs
 {
 	float totalPrice;
 	float pricePaid;
@@ -24,11 +25,11 @@ struct purchaseData // When interacting with the data from the file its easy to 
 	int numberOfToyotaPurchased;
 	int numberOfKiaPurchased;
 	int numberOfHyundaiPurchased;
-};
+}purchaseData;
 
-struct totalCarSalesData
+typedef struct totalCarSalesData
 {
 	char carBrand[15];
 	float totalCarSales;
-};
+}totalCarSalesData;
 

@@ -9,9 +9,9 @@ void printCarSaleOptionsMenu()
 	printf("9. I do not want to purchase any cars\n");
 }
 
-struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
+purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
 {
-	struct purchaseData saleToProcess;
+	purchaseData saleToProcess;
 	saleToProcess.totalPrice = 0;
 	saleToProcess.pricePaid = 0;
 	strcpy(saleToProcess.customerName, " ");
@@ -107,7 +107,7 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 	return saleToProcess; // Returns the struct set up with all the cars related information 
 }
 
-void printSaleInformation(struct purchaseData saleToProcess)
+void printSaleInformation(purchaseData saleToProcess)
 {
 	printf("The total undiscounted price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
 	printf("The total number of cars you purchased is %d\n", saleToProcess.numberOfCarsPurchased);
@@ -116,7 +116,7 @@ void printSaleInformation(struct purchaseData saleToProcess)
 	printf("The number of Hyundai you bought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
 }
 
-struct purchaseData takeUserName(struct purchaseData saleToProcess)
+purchaseData takeUserName(purchaseData saleToProcess)
 {
 	char fullName[200];
 	printf("Please enter your full name\n");
@@ -126,14 +126,14 @@ struct purchaseData takeUserName(struct purchaseData saleToProcess)
 	return saleToProcess;
 }
 
-struct purchaseData takeUserAge(struct purchaseData saleToProcess)
+purchaseData takeUserAge(purchaseData saleToProcess)
 {
 	printf("Please enter your age\n");
 	saleToProcess.customerAge = validateUserAge();
 	return saleToProcess;
 }
 
-struct purchaseData checkforDiscount(struct purchaseData saleToProcess)
+purchaseData checkforDiscount(purchaseData saleToProcess)
 {
 	if (saleToProcess.customerAge > 60)
 	{
@@ -152,7 +152,7 @@ struct purchaseData checkforDiscount(struct purchaseData saleToProcess)
 	return saleToProcess;
 }
 
-void writeSaleDataToFile(struct purchaseData saleToProcess)
+void writeSaleDataToFile(purchaseData saleToProcess)
 {
 	// Simply writes all the data from the given sale into the file to save it
 	// https://www.youtube.com/watch?v=7ZFgphYJvUA&ab_channel=PortfolioCourses Used this video as a source
@@ -182,9 +182,9 @@ void writeSaleDataToFile(struct purchaseData saleToProcess)
 void purchaseACar()
 {
 	// The culmination of many functions simply executes them all in order to perform the entire buy a car and write to file process
-	struct carsData* carsList = calculateCarsInStock();
+	carsData* carsList = calculateCarsInStock();
 
-	struct purchaseData saleToProcess = establishCarsUserWishesToPurchase(carsList);
+	purchaseData saleToProcess = establishCarsUserWishesToPurchase(carsList);
 
 	if (saleToProcess.numberOfCarsPurchased > 0)
 	{

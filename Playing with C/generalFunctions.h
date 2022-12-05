@@ -147,7 +147,7 @@ order to allow the swapping of structs inside an array and then the algorithm go
 larger array itself. This particular method of sorting is very efficient when there are not many things to sort so its perfect for the small number
 of cars */
 {
-	struct carsData temp;
+	carsData temp;
 
 	for (int i = 1; i < lengthOfArray; i++)
 	{
@@ -170,7 +170,7 @@ void bubble_sort(struct totalCarSalesData arr[], int size)
 /* Uses a temporary struct to allow the swaping of cars unfortunetly the previous sorting function can't be resued since a different kind of struct
  is being worked with  */
 {
-	struct totalCarSalesData temporary;
+	totalCarSalesData temporary;
 	int i, j;
 
 	for (i = 0; i < (size - 1); i++)
