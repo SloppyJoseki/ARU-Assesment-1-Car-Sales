@@ -1,5 +1,5 @@
 #include <stdio.h>  // Used for input and output 
-#include <string.h> // Used to make interacting with strings easier in partiular strcpy
+#include <string.h> // Used to make interacting with strings easier in particular strcpy
 #include <stdlib.h> // Used for malloc to help control memory
 #include "dataTypes.h"
 
@@ -10,7 +10,7 @@ void clearTheScreen() // Makes it a bit tidier and also would allow an easy chan
 
 char validateInputForFirstMenu()
 /* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the
-user fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each itteration so the user is unable to
+user fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each iteration so the user is unable to
 mess with subsequent inputs */
 {
 	char menuOption;
@@ -55,12 +55,12 @@ int validateUserAge()
 	int userAge;
 	do
 	{
-		// scanf returns a value for everything it scans so if thats 1 it means it read an int correctly 
+		// scanf returns a value for everything it scans so if that's 1 it means it read an int correctly 
 		int check = scanf("\n%d", &userAge);
 		if (check == 1 && userAge < 150 && userAge > 16)
 		{
 			/* 17 is normal uk driving age but 16 year olds can technically drive with gov permit. The longest documented human life was 126 years
-			but the upper check mainly exsists to stop someone inputing something larger than an int can deal with */
+			but the upper check mainly exists to stop someone inputting something larger than an int can deal with */
 			return userAge;
 		}
 		// Reusing the other validate input code
@@ -124,7 +124,7 @@ void printGoodbye()
 }
 
 int countLinesInFile()
-// Useful for determaning how much sale data is the the file as in the csv format each sale is seperated by a new line
+// Useful for determining how much sale data is the the file as in the csv format each sale is separated by a new line
 // https://www.geeksforgeeks.org/c-program-count-number-lines-file/
 {
 	FILE* fp;
@@ -141,10 +141,10 @@ int countLinesInFile()
 	return count; // Returns the count of every newline character in the file
 }
 
-void insertionSort(struct carsData a[], int lengthOfArray)
+void insertionSort(carsData a[], int lengthOfArray)
 /* Simple insertion sort https://www.youtube.com/watch?v=Tz7vBodZqo8&ab_channel=PortfolioCourses based on this code. A temporary struct is created in
 order to allow the swapping of structs inside an array and then the algorithm goes through and divides the array into a sorted subarray and then the
-larger array itself. This particular method of sorting is very efficient when there are not many things to sort so its perfect for the small number
+larger array itself. This particular method of sorting is very efficient when there are not many things to sort so it's perfect for the small number
 of cars */
 {
 	carsData temp;
@@ -165,9 +165,9 @@ of cars */
 	}
 }
 
-void bubble_sort(struct totalCarSalesData arr[], int size)
+void bubble_sort(totalCarSalesData arr[], int size)
 // http://www.cprogrammingnotes.com/question/sorting-structure-array.html used to help implement the bubble sort
-/* Uses a temporary struct to allow the swaping of cars unfortunetly the previous sorting function can't be resued since a different kind of struct
+/* Uses a temporary struct to allow the swapping of cars unfortunately the previous sorting function can't be reused since a different kind of struct
  is being worked with  */
 {
 	totalCarSalesData temporary;
@@ -190,12 +190,12 @@ void bubble_sort(struct totalCarSalesData arr[], int size)
 	}
 }
 
-struct purchaseData* readPurchaseDataFromFileIntoArray()
+purchaseData* readPurchaseDataFromFileIntoArray()
 {
 	FILE* fileSalesData;
 	int numberOfLinesInFile = countLinesInFile();
 	// Uses the number of lines in the file (aka number of sales) to determine the size of the array
-	struct purchaseData* purchases = (struct purchaseData*) malloc(sizeof(struct purchaseData) * numberOfLinesInFile);
+	purchaseData* purchases = (purchaseData*) malloc(sizeof(purchaseData) * numberOfLinesInFile);
 	if (purchases == NULL)
 	{
 		return;
@@ -237,7 +237,7 @@ struct purchaseData* readPurchaseDataFromFileIntoArray()
 			}
 
 		} while (!feof(fileSalesData));
-		// While its not the end of the file loop through and read all of the sales data into the array of structs
+		// While it's not the end of the file loop through and read all of the sales data into the array of structs
 
 		fclose(fileSalesData);
 

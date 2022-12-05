@@ -11,11 +11,11 @@ being stopped as data is saved in the file at almost every step. */
 
 int main()
 {
-	// Sometime when the data is manualy cleared from the file the program tries to read a blank line as data and it breaks
+	// Sometime when the data is manually cleared from the file the program tries to read a blank line as data and it breaks
 	// The control variable for the main do while loop that keeps the program running until the user wants to exit
 	bool desireToContinue = true;
 	
-	createFileIfNeeded(); // Checks if the text file exsists and if not creates it
+	createFileIfNeeded(); // Checks if the text file exists and if not creates it
 
 	// Program greets the user upon first running
 	printf("Welcome to Otto's Automobiles!\n");
@@ -33,7 +33,7 @@ int main()
 
 			// Clears the screen of all previous output then runs the view stock function
 			clearTheScreen();
-			// Runs the function to display the name, price and number remaning for each type of car sorted in decending order
+			// Runs the function to display the name, price and number remaining for each type of car sorted in descending order
 			 viewStockOfCars();
 			 
 			break;

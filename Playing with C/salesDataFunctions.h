@@ -1,7 +1,7 @@
 
-void printAllSalesMade(struct purchaseData* purchases)
+void printAllSalesMade(purchaseData* purchases)
 {
-	// Feed in teh array of all purchases and loop through to print out all the details
+	// Feed in the array of all purchases and loop through to print out all the details
 	int numberOfSales = countLinesInFile();
 
 	for (int i = 0; i < numberOfSales; i++)
@@ -23,17 +23,17 @@ void printAllSalesMade(struct purchaseData* purchases)
 
 }
 
-void printSortedProfitForEachBrand(struct purchaseData* purchases)
+void printSortedProfitForEachBrand(purchaseData* purchases)
 {
-	struct totalCarSalesData toyotaSalesData;
+	totalCarSalesData toyotaSalesData;
 	strcpy(toyotaSalesData.carBrand, "Toyota");
 	toyotaSalesData.totalCarSales = 0;
 
-	struct totalCarSalesData kiaSalesData;
+	totalCarSalesData kiaSalesData;
 	strcpy(kiaSalesData.carBrand, "Kia");
 	kiaSalesData.totalCarSales = 0;
 
-	struct totalCarSalesData hyundaiSalesData;
+	totalCarSalesData hyundaiSalesData;
 	strcpy(hyundaiSalesData.carBrand, "Hyundai");
 	hyundaiSalesData.totalCarSales = 0;
 
@@ -83,7 +83,7 @@ void printSortedProfitForEachBrand(struct purchaseData* purchases)
 
 	/* Using an array of structs because it makes the sorting and printing easier when two of them happen to have the same value such as
 	£0 as just using if statements can lead to the program printing the same name for multiple of the cars*/
-	struct totalCarSalesData carSalesList[] = { toyotaSalesData, kiaSalesData, hyundaiSalesData };
+	totalCarSalesData carSalesList[] = { toyotaSalesData, kiaSalesData, hyundaiSalesData };
 
 	bubble_sort(carSalesList, 3);
 
@@ -97,7 +97,7 @@ void printSortedProfitForEachBrand(struct purchaseData* purchases)
 void viewAllSalesData()
 {
 	// Runs the two previous functions to print all the data and print the sorted cars sales data
-	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
+	purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 
 	printAllSalesMade(purchases);
 	printSortedProfitForEachBrand(purchases);

@@ -25,13 +25,13 @@ purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
 
 	bool desireToContinue1 = true;
 
-	/* Using another looping menu to see how many cars the user wishes to purchase since cars are not something one generaly buys a lot of at once it
+	/* Using another looping menu to see how many cars the user wishes to purchase since cars are not something one generally buys a lot of at once it
 	seems easier to do it in this simple way rather than have the user enter a number for each and every car type */
 	do
 	{
 		printCarSaleOptionsMenu();
 
-		/*Using the code from DealingWithUserInput to ensure that the character input is properly validatedand no matter what is typed
+		/*Using the code from DealingWithUserInput to ensure that the character input is properly validated and no matter what is typed
 		  everything will work out all good same as above */
 
 		char menuOption1 = validateInputForSecondMenu();

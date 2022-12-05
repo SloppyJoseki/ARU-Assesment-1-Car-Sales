@@ -1,16 +1,16 @@
 
-struct carsData* calculateCarsInStock()
+carsData* calculateCarsInStock()
 {
 	// Sets up the array of purchases and the variables used to store how many cars of each type have been sold
 	int sizeOfArrayOfPurchases = countLinesInFile(); // Again used to help know how many sales have been made so a loop can run through it
 
-	struct purchaseData* purchases = readPurchaseDataFromFileIntoArray();
+	purchaseData* purchases = readPurchaseDataFromFileIntoArray();
 
 	int numberOfToyotaSold = 0;
 	int numberOfKiaSold = 0;
 	int numberOfHyundaiSold = 0;
 
-	// For loop goes through the array of purchases and increments the counters acording to the number of cars sold in each sale
+	// For loop goes through the array of purchases and increments the counters according to the number of cars sold in each sale
 	for (int i = 0; i < sizeOfArrayOfPurchases; i++)
 	{
 		if (purchases[i].numberOfToyotaPurchased != 0)
@@ -32,7 +32,7 @@ struct carsData* calculateCarsInStock()
 
 	free(purchases); // free the memory
 
-	struct carsData* cars = (struct carsData*)malloc(sizeof(struct carsData) * 3); // Makes an array of the cars struct only 3 types of cars in the shop so its size 3
+	carsData* cars = (carsData*)malloc(sizeof(carsData) * 3); // Makes an array of the cars struct only 3 types of cars in the shop so its size 3
 
 	if (cars == NULL)
 	{
@@ -59,7 +59,7 @@ struct carsData* calculateCarsInStock()
 
 void viewStockOfCars()
 {
-	struct carsData* carsList = calculateCarsInStock(); // Calculates the number of cars in stock with previous function
+	carsData* carsList = calculateCarsInStock(); // Calculates the number of cars in stock with previous function
 	insertionSort(carsList, 3); // Sorts that array with the insertion sort
 
 	// Prints all cars in stock
@@ -70,5 +70,5 @@ void viewStockOfCars()
 		printf("We have %d %s's in stock and they cost %.2f GBP each\n", carsList[i].amountOfCar, carsList[i].carName, carsList[i].carPrice);
 	}
 	printf("\n");
-	free(carsList); // Free the momory taken up by carsList to prevent any memory issues
+	free(carsList); // Free the memory taken up by carsList to prevent any memory issues
 }
