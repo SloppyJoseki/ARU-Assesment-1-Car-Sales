@@ -5,6 +5,10 @@
 #include "purchaseFunctions.h"
 #include "salesDataFunctions.h"
 
+/* This program uses the file to run pretty much all of its functionality the rationale behind this is that it should save on memory when the
+as when the program does not have to do something it won't use any extra memory. Additionally it makes the program quite resilient to suddenly
+being stopped as data is saved in the file at almost every step. */ 
+
 int main()
 {
 	// Sometime when the data is manualy cleared from the file the program tries to read a blank line as data and it breaks

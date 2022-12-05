@@ -175,8 +175,11 @@ void bubble_sort(struct totalCarSalesData arr[], int size)
 
 	for (i = 0; i < (size - 1); i++)
 	{
-		for (j = 0; j < (size - 1 - i); j++)
+		for (j = 0; j < (size - 1 - i); j++) 
 		{
+			/* size - 1 - i acts as an optimisation so that you don't go over elements you have already sorted, as the elements "bubble up" there is
+			no need to go over the elements at the end of the array as they are already sorted into place. Therefore for every element you sort you
+			can look at one fewer element on the next pass of the array */
 			if (arr[j].totalCarSales < arr[j + 1].totalCarSales)
 			{
 				temporary = arr[j];
