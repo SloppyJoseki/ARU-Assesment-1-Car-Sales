@@ -1,4 +1,14 @@
 
+void printCarSaleOptionsMenu()
+{
+	printf("Please select the car model you wish to buy!\n");
+	printf("5. Toyota\n");
+	printf("6. KIA\n");
+	printf("7. Hyundai\n");
+	printf("8. I have selected all the cars I wish to purchase\n");
+	printf("9. I do not want to purchase any cars\n");
+}
+
 struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 {
 	struct purchaseData saleToProcess;
@@ -19,12 +29,7 @@ struct purchaseData establishCarsUserWishesToPurchase(struct carsData* carsList)
 	seems easier to do it in this simple way rather than have the user enter a number for each and every car type */
 	do
 	{
-		printf("Please select the car model you wish to buy!\n");
-		printf("5. Toyota\n");
-		printf("6. KIA\n");
-		printf("7. Hyundai\n");
-		printf("8. I have selected all the cars I wish to purchase\n");
-		printf("9. I do not want to purchase any cars\n");
+		printCarSaleOptionsMenu();
 
 		/*Using the code from DealingWithUserInput to ensure that the character input is properly validatedand no matter what is typed
 		  everything will work out all good same as above */

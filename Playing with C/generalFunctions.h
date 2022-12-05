@@ -75,7 +75,8 @@ int validateUserAge()
 bool checkDataFileExists()
 {
 	FILE* fp;
-	if (fp = fopen("carSaleData.txt", "r") != NULL)
+	fp = fopen("carSaleData.txt", "r");
+	if (fp != NULL)
 	{
 		// The file exists 
 		fclose(fp);
@@ -101,6 +102,25 @@ void createFileIfNeeded()
 		fp = fopen("carSaleData.txt", "w");
 		fclose(fp);
 	}
+}
+
+void printMainMenu()
+{
+	// Prints the main menu 
+	printf("\n\n\n");
+	printf("Please enter the number of the menu item you wish to select!\n");
+	printf("1. View stock of cars\n");
+	printf("2. Purchase a car\n");
+	printf("3. View sales figures\n");
+	printf("4. Exit\n");
+	printf("\n");
+}
+
+void printGoodbye()
+{
+	// Program thanks the user upon exit
+	printf("\n");
+	printf("Thanks for using Otto's Automobiles!\n");
 }
 
 int countLinesInFile()

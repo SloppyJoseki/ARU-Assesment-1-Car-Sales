@@ -3,7 +3,7 @@
 #define KIA_PRICE 14900.00f
 #define HYUNDAI_PRICE 19035.20f
 
-typedef enum { false = 0, true = 1 } bool;
+typedef enum { false = 0, true = 1 } bool; // Defining a bool type variable with false and true to improve code readability
 
 struct carsData // The basic way to store simple information about the cars this program interacts with
 {

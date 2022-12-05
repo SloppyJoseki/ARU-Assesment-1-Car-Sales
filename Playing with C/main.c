@@ -18,14 +18,7 @@ int main()
 
 	do
 	{
-		// Prints the main menu 
-		printf("\n\n\n");
-		printf("Please enter the number of the menu item you wish to select!\n");
-		printf("1. View stock of cars\n");
-		printf("2. Purchase a car\n");
-		printf("3. View sales figures\n");
-		printf("4. Exit\n");
-		printf("\n");
+		printMainMenu();
 
 		// Takes the users input for the switch statement will ensure the user only enters something valid
 		char selectedChoice = validateInputForFirstMenu();
@@ -64,8 +57,8 @@ int main()
 	} while (desireToContinue == true);
 
 	// Program thanks the user upon exit
-	printf("\n");
-	printf("Thanks for using Otto's Automobiles!\n");
+	printGoodbye();
+
 
 	return 0;
 }
