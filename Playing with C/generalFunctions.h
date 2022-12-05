@@ -72,25 +72,34 @@ int validateUserAge()
 	} while (true);
 }
 
-bool checkDataFileExsists()
+bool checkDataFileExists()
 {
 	FILE* fp;
-	fp = fopen("carSaleData.txt", "r");
-	if (fp == NULL) // If the file does not exsist will be equal to NULL so open it in write mode and it will be created by default
+	if (fp = fopen("carSaleData.txt", "r") != NULL)
 	{
-		fp = fopen("carSaleData.txt", "w");
-	}
-	fclose(fp);
-	fp = fopen("carSaleData.txt", "r");
-
-	if (fp == NULL) // Check again to make sure the creation went ok as if it failed so will the whole program
-	{
-		return false;
+		// The file exists 
+		fclose(fp);
+		return true;
 	}
 	else
 	{
+		return false;
+	}
+}
+
+void createFileIfNeeded()
+{
+	bool doesFileExsist = checkDataFileExists();
+
+	if (doesFileExsist == true)
+	{
+		return;
+	}
+	else
+	{
+		FILE* fp;
+		fp = fopen("carSaleData.txt", "w");
 		fclose(fp);
-		return true;
 	}
 }
 
