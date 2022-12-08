@@ -2,32 +2,13 @@
 void printCarSaleOptionsMenu(int totalNumberOfCarsUserWantsToBuy)
 {
 	printf("Please keep selecting cars by pressing the relevant number and hitting enter until you are ready to buy and then push 8!\n");
-	printf("So far you have decided to purchase: %d cars\n", totalNumberOfCarsUserWantsToBuy);
+	printf("So far you have decided to purchase: %d cars\n", totalNumberOfCarsUserWantsToBuy); // Helps make how many cars you are buying clear
 	printf("5. Toyota\n");
 	printf("6. KIA\n");
 	printf("7. Hyundai\n");
 	printf("8. I have selected all the cars I wish to purchase\n");
 	printf("9. I do not want to purchase any cars\n");
 	printf("\n");
-}
-
-void optionToyota(carsData* carsList, purchaseData saleToProcess)
-{
-	// carsList[0] is Toyota
-	carsList[0].amountOfCar -= 1;
-	if (carsList[0].amountOfCar >= 0)
-	{
-		saleToProcess.totalPrice = saleToProcess.totalPrice + carsList[0].carPrice;
-		saleToProcess.numberOfCarsPurchased++;
-		saleToProcess.numberOfToyotaPurchased++;
-		return;
-	}
-
-	else
-	{
-		printf("I'm sorry but we have no Toyota's left in stock please select another option\n");
-		return;
-	}
 }
 
 purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
