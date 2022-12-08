@@ -122,8 +122,7 @@ void printSaleInformation(purchaseData saleToProcess)
 purchaseData takeUserName(purchaseData saleToProcess)
 {
 	char fullName[200];
-	printf("Please enter your full name\n");
-	scanf(" %[^\n]s", fullName); // Again the holy white space comes to the rescue scans until it hits new line
+	validateUserName(fullName);
 	fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
 	strcpy(saleToProcess.customerName, fullName);
 	return saleToProcess;
@@ -195,6 +194,7 @@ void purchaseACar()
 		saleToProcess = takeUserName(saleToProcess);
 		saleToProcess = takeUserAge(saleToProcess);
 		saleToProcess = checkforDiscount(saleToProcess);
+		printf("Thank you for your purchase we hope you enjoy!\n");
 
 		writeSaleDataToFile(saleToProcess);
 	}

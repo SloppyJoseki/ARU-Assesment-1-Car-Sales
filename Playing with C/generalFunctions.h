@@ -1,6 +1,7 @@
 #include <stdio.h>  // Used for input and output 
 #include <string.h> // Used to make interacting with strings easier in particular strcpy
 #include <stdlib.h> // Used for malloc to help control memory
+#include <ctype.h>
 #include "dataTypes.h"
 
 void clearTheScreen() // Makes it a bit tidier and also would allow an easy change for other systems where this might not work
@@ -111,6 +112,43 @@ int validateUserAge()
 			printf("Please enter a valid age\n");
 		}
 		while (getchar() != '\n');
+	} while (true);
+}
+
+bool checkStringForNonLetters(char str[])
+{
+	// Loop's through the string to check is any characters are not in the alphabet or are not spaces
+	for (int i = 0; i < strlen(str); i++)
+	{
+		if (isalpha(str[i]) || str[i] == ' ')
+		{
+			continue;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void validateUserName(char fullName[])
+{
+	// Creates a temp string and checks it if it's good then it sets the given string to be equal to the temp string. If not you must enter a new string
+	char tempStr[200];
+	printf("Please enter your full name\n");
+	do
+	{
+		scanf(" %[^\n]s", tempStr);
+		if (checkStringForNonLetters(tempStr) == true)
+		{
+			strcpy(fullName, tempStr);
+			return;
+		}
+		else
+		{
+			printf("Please enter a valid name\n");
+		}
 	} while (true);
 }
 
