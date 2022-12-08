@@ -42,17 +42,17 @@ carsData* calculateCarsInStock()
 	// Sets up all the information about cars in the array the max stock for each is 20 so subtract the number sold to get amount left
 	strcpy(cars[0].carName, "Toyota");
 	cars[0].carPrice = TOYOTA_PRICE;
-	cars[0].amountOfCar = 20 - numberOfToyotaSold;
+	cars[0].amountOfCar = MAX_STOCK - numberOfToyotaSold;
 
 
 	strcpy(cars[1].carName, "KIA");
 	cars[1].carPrice = KIA_PRICE;
-	cars[1].amountOfCar = 20 - numberOfKiaSold;
+	cars[1].amountOfCar = MAX_STOCK - numberOfKiaSold;
 
 
 	strcpy(cars[2].carName, "Hyundai");
 	cars[2].carPrice = HYUNDAI_PRICE;
-	cars[2].amountOfCar = 20 - numberOfHyundaiSold;
+	cars[2].amountOfCar = MAX_STOCK - numberOfHyundaiSold;
 
 	return cars; // Returns the array of cars for use in other functions
 }
