@@ -13,13 +13,9 @@ void printCarSaleOptionsMenu(int totalNumberOfCarsUserWantsToBuy)
 
 purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
 {
-	purchaseData saleToProcess;
+	purchaseData saleToProcess; // These values are added too and so must be initialized now
 	saleToProcess.totalPrice = 0;
 	saleToProcess.pricePaid = 0;
-	strcpy(saleToProcess.customerName, " ");
-	saleToProcess.customerAge = 0;
-	saleToProcess.ifDiscountWasGiven = 'Y';
-	saleToProcess.percentageDiscount = 0;
 	saleToProcess.numberOfCarsPurchased = 0;
 	saleToProcess.numberOfToyotaPurchased = 0;
 	saleToProcess.numberOfKiaPurchased = 0;
