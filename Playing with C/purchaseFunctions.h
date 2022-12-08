@@ -7,6 +7,26 @@ void printCarSaleOptionsMenu()
 	printf("7. Hyundai\n");
 	printf("8. I have selected all the cars I wish to purchase\n");
 	printf("9. I do not want to purchase any cars\n");
+	printf("\n");
+}
+
+void optionToyota(carsData* carsList, purchaseData saleToProcess)
+{
+	// carsList[0] is Toyota
+	carsList[0].amountOfCar -= 1;
+	if (carsList[0].amountOfCar >= 0)
+	{
+		saleToProcess.totalPrice = saleToProcess.totalPrice + carsList[0].carPrice;
+		saleToProcess.numberOfCarsPurchased++;
+		saleToProcess.numberOfToyotaPurchased++;
+		return;
+	}
+
+	else
+	{
+		printf("I'm sorry but we have no Toyota's left in stock please select another option\n");
+		return;
+	}
 }
 
 purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
@@ -145,7 +165,7 @@ purchaseData checkforDiscount(purchaseData saleToProcess)
 		saleToProcess.percentageDiscount = 10;
 		saleToProcess.pricePaid = saleToProcess.totalPrice - (saleToProcess.totalPrice / 10);
 		printf("Due to your age you have been given a 10 percent discount\n");
-		printf("Your new total is %.2f\n", saleToProcess.totalPrice);
+		printf("Your new total is %.2f GBP\n", saleToProcess.totalPrice);
 	}
 	else
 	{
