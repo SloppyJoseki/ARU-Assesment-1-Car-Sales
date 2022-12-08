@@ -123,7 +123,6 @@ purchaseData takeUserName(purchaseData saleToProcess)
 {
 	char fullName[200];
 	validateUserName(fullName);
-	fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
 	strcpy(saleToProcess.customerName, fullName);
 	printf("\n");
 	return saleToProcess;

@@ -14,7 +14,7 @@ void printAllSalesMade(purchaseData* purchases)
 	for (int i = 0; i < numberOfSales; i++)
 	{
 		printf("Sale number: %d\n", i + 1);
-		printf("total price: %.2f GBP\n price paid: %.2f GBP\n customers name: %s\n customers age: %d\n if discount was given: %c\n percentage discount: %d\n number of "
+		printf("price without discount: %.2f GBP\n price paid: %.2f GBP\n customers name: %s\n customers age: %d\n if discount was given: %c\n percentage discount: %d\n number of "
 			"cars purchased: %d\n number of Toyota purchased: %d\n number of Kia purchased: %d\n number of Hyundai purchased %d\n",
 			purchases[i].totalPrice,
 			purchases[i].pricePaid,

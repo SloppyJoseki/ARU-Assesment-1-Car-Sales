@@ -64,7 +64,7 @@ void printstockofCars(carsData* carsList)
 	for (int i = 0; i < 3; i++) // Loop's through carsList and prints each struct
 	{
 		// The £ sign is a pain to use so just write GBP instead 
-		printf("We have %d %s's in stock and they cost %.2f GBP each\n", carsList[i].amountOfCar, carsList[i].carName, carsList[i].carPrice);
+		printf("We have %d %ss in stock and they cost %.2f GBP each\n", carsList[i].amountOfCar, carsList[i].carName, carsList[i].carPrice);
 	}
 	printf("--------------------------------------------------------------\n");
 	printf("\n");
@@ -77,6 +77,6 @@ void viewStockOfCars()
 
 	printstockofCars(carsList);
 	free(carsList); // Free the memory taken up by carsList to prevent any memory issues
-	printf("life is tough so we have a sale on at the moment for anyone aged 60 or older please enjoy 10 percent off on the house!\n");
+	printf("Life is tough so we have a sale on at the moment for anyone aged 60 or older please enjoy 10 percent off on the house!\n");
 	printf("\n");
 }
