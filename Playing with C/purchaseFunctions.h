@@ -125,6 +125,7 @@ purchaseData takeUserName(purchaseData saleToProcess)
 	validateUserName(fullName);
 	fullName[strlen(fullName) + 1] = '\0'; // Just to ensure the string is null terminated
 	strcpy(saleToProcess.customerName, fullName);
+	printf("\n");
 	return saleToProcess;
 }
 
@@ -132,6 +133,7 @@ purchaseData takeUserAge(purchaseData saleToProcess)
 {
 	printf("Please enter your age\n");
 	saleToProcess.customerAge = validateUserAge();
+	printf("\n");
 	return saleToProcess;
 }
 
@@ -143,7 +145,7 @@ purchaseData checkforDiscount(purchaseData saleToProcess)
 		saleToProcess.percentageDiscount = 10;
 		saleToProcess.pricePaid = saleToProcess.totalPrice - (saleToProcess.totalPrice / 10);
 		printf("Due to your age you have been given a 10 percent discount\n");
-		printf("Your new total is %f", saleToProcess.totalPrice);
+		printf("Your new total is %.2f\n", saleToProcess.totalPrice);
 	}
 	else
 	{
@@ -161,7 +163,7 @@ void writeSaleDataToFile(purchaseData saleToProcess)
 	FILE* fileData = fopen("carSaleData.txt", "a");
 	if (fileData == NULL)
 	{
-		printf("ERROR opening file please\n");
+		printf("ERROR opening file\n");
 		return;
 
 	}
