@@ -1,7 +1,7 @@
 
 void printCarSaleOptionsMenu()
 {
-	printf("Please select the car model you wish to buy!\n");
+	printf("Please keep selecting cars until you are ready to buy and then push 8!\n");
 	printf("5. Toyota\n");
 	printf("6. KIA\n");
 	printf("7. Hyundai\n");

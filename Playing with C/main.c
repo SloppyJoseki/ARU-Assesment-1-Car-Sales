@@ -18,7 +18,7 @@ int main()
 	createFileIfNeeded(); // Checks if the text file exists and if not creates it
 
 	// Program greets the user upon first running
-	printf("Welcome to Otto's Automobiles!\n");
+	printGreeting();
 
 	do
 	{

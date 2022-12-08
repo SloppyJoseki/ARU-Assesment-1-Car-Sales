@@ -1,4 +1,5 @@
 // Prices based on googling for random cars these brands sell
+#define NUMBER_OF_CARS 3
 #define TOYOTA_PRICE 21460.60f
 #define KIA_PRICE 14900.00f
 #define HYUNDAI_PRICE 19035.20f

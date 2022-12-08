@@ -5,6 +5,11 @@ carsData* calculateCarsInStock()
 	int sizeOfArrayOfPurchases = countLinesInFile(); // Again used to help know how many sales have been made so a loop can run through it
 
 	purchaseData* purchases = readPurchaseDataFromFileIntoArray();
+	if (purchases == NULL)
+	{
+		free(purchases);
+		return NULL;
+	}
 
 	int numberOfToyotaSold = 0;
 	int numberOfKiaSold = 0;
@@ -36,7 +41,7 @@ carsData* calculateCarsInStock()
 
 	if (cars == NULL)
 	{
-		return;
+		return NULL;
 	}
 
 	// Sets up all the information about cars in the array the max stock for each is 20 so subtract the number sold to get amount left

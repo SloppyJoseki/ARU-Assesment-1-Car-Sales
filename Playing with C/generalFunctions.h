@@ -8,6 +8,48 @@ void clearTheScreen() // Makes it a bit tidier and also would allow an easy chan
 	system("cls");
 }
 
+void printline(char* line, int no)
+{
+	// A loop that adds spaces continuously to the start of a line to give the illusion of movement when repeated
+	int i;
+	for (i = 0; i < no; i++)
+		printf(" ");
+	printf("%s\n", line);
+}
+
+void drawcar(int no_of_spaces)
+{
+	// Makes use of the printline function to  move the car when repeated
+	char* line1 = "       .--------.";
+	char* line2 = " ____/_____|___ \\___";
+	char* line3 = " O    _   - |   _   ,*";
+	char* line4 = " '--(_)-------(_)--'";
+	printline(line1, no_of_spaces);
+	printline(line2, no_of_spaces);
+	printline(line3, no_of_spaces);
+	printline(line4, no_of_spaces);
+}
+
+void printGreeting()
+{
+	// https://www.youtube.com/watch?v=qOam8Veyw10&ab_channel=SaifurRahmanMohsin Car drawing code taken from this video
+	// Prints and moves the car across the screen then prints the greeting. The screen is cleared each time the car is printed so it "moves"
+	for (int i = 0; i < 50; i++)
+	{
+		clearTheScreen();
+		drawcar(i);
+	}
+	printf("\n-----------------------------------------\n");
+	printf("Welcome to Otto's Automobiles!\n");
+}
+
+void printGoodbye()
+{
+	// Program thanks the user upon exit
+	printf("\n");
+	printf("Thanks for using Otto's Automobiles!\n");
+}
+
 char validateInputForFirstMenu()
 /* Function checks the users input by taking the scanf result and then if it matches an expected input the program is allowed to proceed however if the
 user fails to input correctly they will get stuck in a loop until the do so additionally it clears the buffer after each iteration so the user is unable to
@@ -116,13 +158,6 @@ void printMainMenu()
 	printf("\n");
 }
 
-void printGoodbye()
-{
-	// Program thanks the user upon exit
-	printf("\n");
-	printf("Thanks for using Otto's Automobiles!\n");
-}
-
 int countLinesInFile()
 // Useful for determining how much sale data is the the file as in the csv format each sale is separated by a new line
 // https://www.geeksforgeeks.org/c-program-count-number-lines-file/
@@ -195,21 +230,23 @@ purchaseData* readPurchaseDataFromFileIntoArray()
 	FILE* fileSalesData;
 	int numberOfLinesInFile = countLinesInFile();
 	// Uses the number of lines in the file (aka number of sales) to determine the size of the array
+	if (numberOfLinesInFile == 0)
+	{
+		return NULL;
+	}
 	purchaseData* purchases = (purchaseData*) malloc(sizeof(purchaseData) * numberOfLinesInFile);
 	if (purchases == NULL)
 	{
-		return;
+		return NULL;
 	}
 	fileSalesData = fopen("carSaleData.txt", "r");
 
 	if (fileSalesData != NULL)
 	{
-		int valuesRead = 0;
 		int valuesRecorded = 0;
-
 		do
 		{
-			valuesRead = fscanf(fileSalesData, "%f, %f, %d, %c, %d, %d, %d, %d, %d, %[^\n]s",
+			fscanf(fileSalesData, "%f, %f, %d, %c, %d, %d, %d, %d, %d, %[^\n]s",
 				&purchases[valuesRecorded].totalPrice,
 				&purchases[valuesRecorded].pricePaid,
 				&purchases[valuesRecorded].customerAge,
@@ -220,21 +257,9 @@ purchaseData* readPurchaseDataFromFileIntoArray()
 				&purchases[valuesRecorded].numberOfKiaPurchased,
 				&purchases[valuesRecorded].numberOfHyundaiPurchased,
 				&purchases[valuesRecorded].customerName);
-			if (valuesRead == 10)
-			{
-				valuesRecorded++;
-			}
 
-			if (valuesRead != 10 && !feof(fileSalesData))
-			{
-				printf("ERROR formatting issue in file please try to fix\n");
-			}
+			valuesRecorded++;
 
-			if (ferror(fileSalesData))
-			{
-				printf("ERROR file error\n");
-
-			}
 
 		} while (!feof(fileSalesData));
 		// While it's not the end of the file loop through and read all of the sales data into the array of structs
