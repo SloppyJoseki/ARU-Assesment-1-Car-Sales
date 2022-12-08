@@ -9,6 +9,12 @@ void clearTheScreen() // Makes it a bit tidier and also would allow an easy chan
 	system("cls");
 }
 
+void systemSleep()
+{
+	// Causes the system to make a brief pause to help smooth out the car animation
+	system("ping -c 1 localhost > nul");
+}
+
 void printline(char* line, int no)
 {
 	// A loop that adds spaces continuously to the start of a line to give the illusion of movement when repeated
@@ -37,6 +43,7 @@ void printGreeting()
 	// Prints and moves the car across the screen then prints the greeting. The screen is cleared each time the car is printed so it "moves"
 	for (int i = 0; i < 50; i++)
 	{
+		systemSleep();
 		clearTheScreen();
 		drawcar(i);
 	}
@@ -47,8 +54,15 @@ void printGreeting()
 void printGoodbye()
 {
 	// Program thanks the user upon exit
-	printf("\n");
+	for (int i = 0; i < 50; i++)
+	{
+		systemSleep();
+		clearTheScreen();
+		drawcar(i);
+	}
+	printf("\n-----------------------------------------\n");
 	printf("Thanks for using Otto's Automobiles!\n");
+	printf("We hope to see you again soon!\n");
 }
 
 char validateInputForFirstMenu()
