@@ -150,6 +150,7 @@ bool checkStringForNonLetters(char str[])
 
 bool checkStringForNewlineCharacter(char str[])
 {
+	// Loop's through the string to check for a newline character
 	int stringLength = strlen(str);
 	for (int i = 0; i < stringLength; i++)
 	{
@@ -171,10 +172,11 @@ void validateUserName(char fullName[])
 		fgets(tempStr, 200, stdin); // Using fgets to eliminate the possibility of an input string that is too long
 		int stringLength = strlen(tempStr);
 		if (checkStringForNewlineCharacter(tempStr) == false) 
+		// If tempStr does not contain a \n the input was too large and so the buffer needs to be cleared 
 		{
 			while (getchar() != '\n');
 		}
-		tempStr[stringLength - 1] = '\0';
+		tempStr[stringLength - 1] = '\0'; // Ensure the string is null terminated and get rid of a \n character if one does exist
 
 		if (checkStringForNonLetters(tempStr) == true)
 		{
