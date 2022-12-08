@@ -1,7 +1,7 @@
 
 void printCarSaleOptionsMenu()
 {
-	printf("Please keep selecting cars until you are ready to buy and then push 8!\n");
+	printf("Please keep selecting cars by pressing the relevant number and hitting enter until you are ready to buy and then push 8!\n");
 	printf("5. Toyota\n");
 	printf("6. KIA\n");
 	printf("7. Hyundai\n");
@@ -109,11 +109,14 @@ purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
 
 void printSaleInformation(purchaseData saleToProcess)
 {
+	printf("-------------------------------------------------------------\n");
 	printf("The total undiscounted price of your purchase is: %.2f GBP\n", saleToProcess.totalPrice);
 	printf("The total number of cars you purchased is %d\n", saleToProcess.numberOfCarsPurchased);
-	printf("The number of Toyota you bought is: %d\n", saleToProcess.numberOfToyotaPurchased);
-	printf("The number of Kia you bought is: %d\n", saleToProcess.numberOfKiaPurchased);
-	printf("The number of Hyundai you bought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
+	printf("The number of Toyota you have brought is: %d\n", saleToProcess.numberOfToyotaPurchased);
+	printf("The number of Kia you have brought is: %d\n", saleToProcess.numberOfKiaPurchased);
+	printf("The number of Hyundai you have brought is: %d\n", saleToProcess.numberOfHyundaiPurchased);
+	printf("-------------------------------------------------------------\n");
+	printf("\n");
 }
 
 purchaseData takeUserName(purchaseData saleToProcess)

@@ -5,11 +5,6 @@ carsData* calculateCarsInStock()
 	int sizeOfArrayOfPurchases = countLinesInFile(); // Again used to help know how many sales have been made so a loop can run through it
 
 	purchaseData* purchases = readPurchaseDataFromFileIntoArray();
-	if (purchases == NULL)
-	{
-		free(purchases);
-		return NULL;
-	}
 
 	int numberOfToyotaSold = 0;
 	int numberOfKiaSold = 0;
@@ -37,7 +32,7 @@ carsData* calculateCarsInStock()
 
 	free(purchases); // free the memory
 
-	carsData* cars = (carsData*)malloc(sizeof(carsData) * 3); // Makes an array of the cars struct only 3 types of cars in the shop so its size 3
+	carsData* cars = (carsData*)malloc(sizeof(carsData) * NUMBER_OF_CARS); // Makes an array of the cars struct only 3 types of cars in the shop so its size 3
 
 	if (cars == NULL)
 	{
