@@ -76,6 +76,7 @@ mess with subsequent inputs */
 		scanf("\n%c", &menuOption);
 		if (menuOption == '1' || menuOption == '2' || menuOption == '3' || menuOption == '4')
 		{
+			while (getchar() != '\n');
 			return menuOption;
 		}
 		else
@@ -95,6 +96,7 @@ char validateInputForSecondMenu()
 		scanf("\n%c", &menuOption2);
 		if (menuOption2 == '5' || menuOption2 == '6' || menuOption2 == '7' || menuOption2 == '8' || menuOption2 == '9')
 		{
+			while (getchar() != '\n');
 			return menuOption2;
 		}
 		else
@@ -114,7 +116,7 @@ int validateUserAge()
 	{
 		// scanf returns a value for everything it scans so if that's 1 it means it read an int correctly 
 		int check = scanf("\n%d", &userAge);
-		if (check == 1 && userAge < 150 && userAge > 16)
+		if (check == 1 && userAge < 150 && userAge >= 16)
 		{
 			/* 17 is normal uk driving age but 16 year olds can technically drive with gov permit. The longest documented human life was 126 years
 			but the upper check mainly exists to stop someone inputting something larger than an int can deal with */
@@ -153,14 +155,18 @@ void validateUserName(char fullName[])
 	printf("Please enter your full name\n");
 	do
 	{
-		scanf(" %[^\n]s", tempStr);
+		fgets(tempStr, 200, stdin); // Using fgets to eliminate the possibility of an input string that is too long
+		int lengthOfStr = strlen(tempStr);
+		tempStr[lengthOfStr - 1] = '\0'; // Setting the final character in the string to NULL so that the string can terminate
 		if (checkStringForNonLetters(tempStr) == true)
 		{
+			while (getchar() != '\n'); // Clearing the buffer of any extra inputs
 			strcpy(fullName, tempStr);
 			return;
 		}
 		else
 		{
+			while (getchar() != '\n');
 			printf("Please enter a valid name\n");
 		}
 	} while (true);
