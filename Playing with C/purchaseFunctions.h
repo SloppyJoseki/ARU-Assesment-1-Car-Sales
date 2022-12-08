@@ -1,7 +1,8 @@
 
-void printCarSaleOptionsMenu()
+void printCarSaleOptionsMenu(int totalNumberOfCarsUserWantsToBuy)
 {
 	printf("Please keep selecting cars by pressing the relevant number and hitting enter until you are ready to buy and then push 8!\n");
+	printf("So far you have decided to purchase: %d cars\n", totalNumberOfCarsUserWantsToBuy);
 	printf("5. Toyota\n");
 	printf("6. KIA\n");
 	printf("7. Hyundai\n");
@@ -44,12 +45,14 @@ purchaseData establishCarsUserWishesToPurchase(carsData* carsList)
 	saleToProcess.numberOfHyundaiPurchased = 0;
 
 	bool desireToContinue1 = true;
+	int totalNumberOfCarsUserWantsToBuy = -1;
 
 	/* Using another looping menu to see how many cars the user wishes to purchase since cars are not something one generally buys a lot of at once it
 	seems easier to do it in this simple way rather than have the user enter a number for each and every car type */
 	do
 	{
-		printCarSaleOptionsMenu();
+		totalNumberOfCarsUserWantsToBuy += 1;
+		printCarSaleOptionsMenu(totalNumberOfCarsUserWantsToBuy);
 
 		/*Using the code from DealingWithUserInput to ensure that the character input is properly validated and no matter what is typed
 		  everything will work out all good same as above */
@@ -159,7 +162,7 @@ purchaseData takeUserAge(purchaseData saleToProcess)
 
 purchaseData checkforDiscount(purchaseData saleToProcess)
 {
-	if (saleToProcess.customerAge > 60)
+	if (saleToProcess.customerAge >= 60)
 	{
 		saleToProcess.ifDiscountWasGiven = 'Y';
 		saleToProcess.percentageDiscount = 10;

@@ -148,6 +148,19 @@ bool checkStringForNonLetters(char str[])
 	return true;
 }
 
+bool checkStringForNewlineCharacter(char str[])
+{
+	int stringLength = strlen(str);
+	for (int i = 0; i < stringLength; i++)
+	{
+		if (str[i] == '\n')
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void validateUserName(char fullName[])
 {
 	// Creates a temp string and checks it if it's good then it sets the given string to be equal to the temp string. If not you must enter a new string
@@ -156,17 +169,20 @@ void validateUserName(char fullName[])
 	do
 	{
 		fgets(tempStr, 200, stdin); // Using fgets to eliminate the possibility of an input string that is too long
-		int lengthOfStr = strlen(tempStr);
-		tempStr[lengthOfStr - 1] = '\0'; // Setting the final character in the string to NULL so that the string can terminate
+		int stringLength = strlen(tempStr);
+		if (checkStringForNewlineCharacter(tempStr) == false) 
+		{
+			while (getchar() != '\n');
+		}
+		tempStr[stringLength - 1] = '\0';
+
 		if (checkStringForNonLetters(tempStr) == true)
 		{
-			while (getchar() != '\n'); // Clearing the buffer of any extra inputs
 			strcpy(fullName, tempStr);
 			return;
 		}
 		else
 		{
-			while (getchar() != '\n');
 			printf("Please enter a valid name\n");
 		}
 	} while (true);

@@ -1,15 +1,10 @@
-19035.20,19035.20,24,N,0,1,0,0,1,Harry Giddens
-19035.20,19035.20,44,N,0,1,0,0,1,Tim Bool
-14900.00,13410.00,66,Y,10,1,0,1,0,Toby Wheeler
-21460.60,19314.54,66,Y,10,1,1,0,0,Amy Coles
-19035.20,19035.20,60,N,0,1,0,0,1,Luke Boole
-55395.80,49856.22,66,Y,10,3,1,1,1,Hazza G
-322325.56,322325.56,17,N,0,17,8,5,4,LUJO
-193700.00,193700.00,17,N,0,13,0,13,0,LUJO
-21460.60,19314.54,66,Y,10,1,1,0,0,gh
-21460.60,19314.54,66,Y,10,1,1,0,0,har
-21460.60,21460.60,55,N,0,1,1,0,0,har
-19035.20,19035.20,55,N,0,1,0,0,1,Harry Giddens
 21460.60,21460.60,22,N,0,1,1,0,0,Harry Giddens
-21460.60,21460.60,22,N,0,1,1,0,0,ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-21460.60,21460.60,55,N,0,1,1,0,0,gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+14900.00,14900.00,22,N,0,1,0,1,0,Tim Boole
+21460.60,21460.60,55,N,0,1,1,0,0,Tim Coombs
+14900.00,14900.00,22,N,0,1,0,1,0,ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+19035.20,17131.68,66,Y,10,1,0,0,1,Hazza G
+21460.60,19314.54,66,Y,10,1,1,0,0,Harry Giddens
+21460.60,21460.60,55,N,0,1,1,0,0,Harry Giddens
+14900.00,13410.00,60,Y,10,1,0,1,0,gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+19035.20,17131.68,66,Y,10,1,0,0,1,gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+21460.60,19314.54,72,Y,10,1,1,0,0,Tim Boole
