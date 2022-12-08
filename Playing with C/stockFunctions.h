@@ -57,18 +57,24 @@ carsData* calculateCarsInStock()
 	return cars; // Returns the array of cars for use in other functions
 }
 
+void printstockofCars(carsData* carsList)
+{
+	printf("Here is a list of our stock of cars!\n");
+	printf("--------------------------------------------------------------\n");
+	for (int i = 0; i < 3; i++) // Loop's through carsList and prints each struct
+	{
+		// The £ sign is a pain to use so just write GBP instead 
+		printf("We have %d %s's in stock and they cost %.2f GBP each\n", carsList[i].amountOfCar, carsList[i].carName, carsList[i].carPrice);
+	}
+	printf("--------------------------------------------------------------\n");
+	printf("\n");
+}
+
 void viewStockOfCars()
 {
 	carsData* carsList = calculateCarsInStock(); // Calculates the number of cars in stock with previous function
 	insertionSort(carsList, 3); // Sorts that array with the insertion sort
 
-	// Prints all cars in stock
-	printf("Here is a list of our stock of cars!\n");
-	for (int i = 0; i < 3; i++)
-	{
-		// The £ sign is a pain to use so just write GBP instead 
-		printf("We have %d %s's in stock and they cost %.2f GBP each\n", carsList[i].amountOfCar, carsList[i].carName, carsList[i].carPrice);
-	}
-	printf("\n");
+	printstockofCars(carsList);
 	free(carsList); // Free the memory taken up by carsList to prevent any memory issues
 }
