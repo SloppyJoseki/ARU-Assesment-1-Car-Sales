@@ -4,6 +4,13 @@ void printAllSalesMade(purchaseData* purchases)
 	// Feed in the array of all purchases and loop through to print out all the details
 	int numberOfSales = countLinesInFile();
 
+	if (numberOfSales == 0)
+	{
+		printf("---------------------------------------------------\n");
+		printf("We have not made any sales so far!\n");
+		printf("\n");
+	}
+
 	for (int i = 0; i < numberOfSales; i++)
 	{
 		printf("Sale number: %d\n", i + 1);
