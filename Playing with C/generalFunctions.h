@@ -137,7 +137,7 @@ bool checkStringForNonLetters(char str[])
 	// Loop's through the string to check is any characters are not in the alphabet or are not spaces
 	for (int i = 0; i < strlen(str); i++)
 	{
-		if (isalpha(str[i]) || str[i] == ' ')
+		if (isalpha((unsigned char)str[i]) || str[i] == ' ') // If isalpha is not typecast to unsigned char it breaks on an input like é
 		{
 			continue;
 		}
