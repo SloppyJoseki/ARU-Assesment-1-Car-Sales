@@ -15,7 +15,7 @@ void systemSleep()
 	system("ping -c 1 localhost > nul");
 }
 
-void printline(char* line, int no)
+void printLine(char* line, int no)
 {
 	// A loop that adds spaces continuously to the start of a line to give the illusion of movement when repeated
 	int i;
@@ -24,17 +24,17 @@ void printline(char* line, int no)
 	printf("%s\n", line);
 }
 
-void drawcar(int no_of_spaces)
+void drawCar(int no_of_spaces)
 {
 	// Makes use of the printline function to  move the car when repeated
 	char* line1 = "       .--------.";
 	char* line2 = " ____/_____|___ \\___";
 	char* line3 = " O    _   - |   _   ,*";
 	char* line4 = " '--(_)-------(_)--'";
-	printline(line1, no_of_spaces);
-	printline(line2, no_of_spaces);
-	printline(line3, no_of_spaces);
-	printline(line4, no_of_spaces);
+	printLine(line1, no_of_spaces);
+	printLine(line2, no_of_spaces);
+	printLine(line3, no_of_spaces);
+	printLine(line4, no_of_spaces);
 }
 
 void printGreeting()
@@ -45,7 +45,7 @@ void printGreeting()
 	{
 		systemSleep();
 		clearTheScreen();
-		drawcar(i);
+		drawCar(i);
 	}
 	printf("\n-----------------------------------------\n");
 	printf("Welcome to Otto's Automobiles!\n");
@@ -58,7 +58,7 @@ void printGoodbye()
 	{
 		systemSleep();
 		clearTheScreen();
-		drawcar(i);
+		drawCar(i);
 	}
 	printf("\n-----------------------------------------\n");
 	printf("Thanks for using Otto's Automobiles!\n");
@@ -116,7 +116,7 @@ int validateUserAge()
 	{
 		// scanf returns a value for everything it scans so if that's 1 it means it read an int correctly 
 		int check = scanf("\n%d", &userAge);
-		if (check == 1 && userAge < 150 && userAge >= 16)
+		if (check == 1 && userAge <= 150 && userAge >= 16)
 		{
 			/* 17 is normal uk driving age but 16 year olds can technically drive with gov permit. The longest documented human life was 126 years
 			but the upper check mainly exists to stop someone inputting something larger than an int can deal with */
@@ -125,7 +125,8 @@ int validateUserAge()
 		// Reusing the other validate input code
 		else
 		{
-			printf("Please enter a valid age\n");
+			printf("Please enter a valid age *between 16 and 150*\n");
+
 		}
 		while (getchar() != '\n');
 	} while (true);
