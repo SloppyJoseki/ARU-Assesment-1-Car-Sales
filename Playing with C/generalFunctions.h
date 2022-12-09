@@ -1,7 +1,7 @@
 #include <stdio.h>  // Used for input and output 
 #include <string.h> // Used to make interacting with strings easier in particular strcpy
 #include <stdlib.h> // Used for malloc to help control memory
-#include <ctype.h>
+#include <ctype.h> // Used for isalpha to help validate strings 
 #include "dataTypes.h"
 
 void clearTheScreen() // Makes it a bit tidier and also would allow an easy change for other systems where this might not work

@@ -11,7 +11,6 @@ being stopped as data is saved in the file at almost every step. */
 
 int main()
 {
-	// Sometime when the data is manually cleared from the file the program tries to read a blank line as data and it breaks
 	// The control variable for the main do while loop that keeps the program running until the user wants to exit
 	bool desireToContinue = true;
 	
